@@ -24,6 +24,7 @@ class PhysicalMachine(models.Model):
     machine_info = models.OneToOneField(Machine_info)
 
 
+
 class VirtualMachine(models.Model):
     virtualIp = models.CharField(max_length=16)
     process_info = models.TextField(max_length=10240)

@@ -11,18 +11,19 @@ from django.shortcuts import render
 class PhyhostListView(View):
     def get(self, request):
         all_physical = PhysicalMachine.objects.all().order_by("physicalIp")
+
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
             page = 1
-        p = Paginator(all_physical, 3 , request=request)
+        p = Paginator(all_physical, 3, request=request)
         physicals_list = p.page(page)
         return render(request, 'myHost.html', {
             'all_physical': physicals_list,
         })
 
 class PhyhostDetailView(View):
-    def get(self, request, phyhost_id ):
+    def get(self, request, phyhost_id):
         phyhost = PhysicalMachine.objects.get(id=int(phyhost_id))
         return render(request, '',{})
 
@@ -32,8 +33,8 @@ class PhyhostDetailView(View):
          return 0
 
 class VirhostListView(View):
-    def get(self, request):
-        all_physical = PhysicalMachine.objects.all().order_by("physicalIp")
+    def get(self, request,virhost_id):
+
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
