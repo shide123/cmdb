@@ -7,11 +7,11 @@ from myhost.models import *
 
 from django.shortcuts import render
 
+
 # Create your views here.
 class PhyhostListView(View):
     def get(self, request):
         all_physical = PhysicalMachine.objects.all().order_by("physicalIp")
-
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
@@ -22,63 +22,71 @@ class PhyhostListView(View):
             'all_physical': physicals_list,
         })
 
+
 class PhyhostDetailView(View):
-    def get(self, request, phyhost_id):
-        phyhost = PhysicalMachine.objects.get(id=int(phyhost_id))
-        return render(request, '',{})
-
-    def post(self, request):
+    def get(self, request, physicalIp):
+        phyhost = PhysicalMachine.objects.get(physicalIp=physicalIp)
+        return render(request, 'phyhost_detail.html', {'phyhost', phyhost})
 
 
-         return 0
-
-class VirhostListView(View):
-    def get(self, request,virhost_id):
-
+class VirhostList_allView(View):
+    def get(self, request):
+        all_virtual = VirtualMachine.objects.all().order_by("virtualIp")
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
             page = 1
-            #p = Paginator
-        return 0
+        p = Paginator(all_virtual, 3, request=request)
+        virtual_list = p.page(page)
+        return render(request, 'myVirHost.html', {'all_virtual', virtual_list})
 
+
+class VirhostListView(View):
+    def get(self, request, physicalIp):
+        physical = PhysicalMachine.objects.get(physicalIp=physicalIp)
+        all_virtual = VirtualMachine.objects.get(PhysicalMachine=physical)
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+        p = Paginator(all_virtual, 3, request=request)
+        virtual_list = p.page(page)
+        return render(request, 'myVirHost.html', {'all_virtual', virtual_list})
 
 
 class VirhostDetailView(View):
-    def get(self, request):
-        all_physical = PhysicalMachine.objects.all().order_by("physicalIp")
-
-        return 0
-
-
-
-
-
-
+    def get(self, request, virtualIp):
+        virhost = PhysicalMachine.objects.get(virtualIp=virtualIp)
+        return render(request, 'virhost_detail.html', {'virhost', virhost})
 
 
 class UpdatePhyHostView(View):
     def get(self, request):
-
         return 0
+
     def post(self, request):
         return 0
+
 
 class UpdateVirHostView(View):
     def get(self, request):
         return 0
+
     def post(self, request):
         return 0
+
 
 class AddPhyHostView(View):
     def get(self, request):
-
         return 0
+
     def post(self, request):
         return 0
+
 
 class AddVirHostView(View):
     def get(self, request):
         return 0
+
     def post(self, request):
         return 0
