@@ -33,10 +33,11 @@
 <body>
 <script type="text/javascript">
     gethost = function () {
-         var physicalIp =$('#physicalIp_input').val()
+        var physicalIp_input = document.getElementById("physicalIp_input").value;
         $.ajax({
             url: '{% url 'myhost:machineinfo' %}',
-            type: 'POST',
+            type: 'GET',
+            data: {"physicalIp_input":physicalIp_input},
             success: function (data) {
                 console.log(data);
             },
@@ -924,9 +925,8 @@
                                             </div>
                                         </div>
                                         <div class="box-body">
-
                                             <form class="form-horizontal" role="form"
-                                                  action="{% url 'myhost:addphy' %} method='post'">
+                                                  action="{% url 'myhost:addphy' %}" method="post">
                                                 {% csrf_token %}
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">物理机IP</label>
@@ -952,20 +952,22 @@
                                                                name="machineRoom_attr">
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label">机器详情</label>
-                                                    <div class="col-sm-9">
+                                                <form>
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">机器详情</label>
+                                                        <div class="col-sm-9">
                                                         <textarea class="form-control" rows="3" id="machine_info_input"
                                                                   name="machine_info_input"></textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <button type="button" class="btn btn-inverse"
-                                                            onclick="gethost();">
-                                                        <span>获取详情</span>
-                                                    </button>
-                                                </div>
-
+                                                    <div class="col-lg-12">
+                                                        <button type="button" class="btn btn-inverse"
+                                                                onclick="gethost();">
+                                                            <span>获取详情</span>
+                                                        </button>
+                                                    </div>
+                                                </form>
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label"
                                                            for="s2id_autogen8">下属虚拟机</label>
@@ -994,17 +996,17 @@
                                                         <i class="fa fa-arrow-circle-o-up"></i>
                                                         <span>提交</span>
                                                     </button>
-                                                    <button type="button" class="btn btn-danger delete">
-                                                        <i class="fa fa-trash-o"></i>
-                                                        <span>删除</span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success tip-right">
-                                                        <i class="fa fa-arrow-circle-o-up"></i>
-                                                        <span>取消</span>
-                                                    </button>
                                                 </div>
 
                                             </form>
+                                            <button type="button" class="btn btn-danger delete">
+                                                <i class="fa fa-trash-o"></i>
+                                                <span>删除</span>
+                                            </button>
+                                            <button type="button" class="btn btn-success tip-right">
+                                                <i class="fa fa-arrow-circle-o-up"></i>
+                                                <span>取消</span>
+                                            </button>
 
 
                                         </div>
@@ -1037,42 +1039,8 @@
         </div>
     </div>
 </section>
-<!--/PAGE -->
-<!-- JAVASCRIPTS -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!-- JQUERY -->
 <script src="{% static "js/jquery/jquery-2.0.3.min.js" %}"></script>
 <!-- JQUERY UI-->
 <script src="{% static "js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js" %}"></script>
-<!-- BOOTSTRAP -->
-<script src="{% static "bootstrap-dist/js/bootstrap.min.js" %}"></script>
-
-
-<!-- DATE RANGE PICKER -->
-<script src="{% static "js/bootstrap-daterangepicker/moment.min.js" %}"></script>
-
-<script src="{% static "js/bootstrap-daterangepicker/daterangepicker.min.js" %}"></script>
-<!-- SLIMSCROLL -->
-<script type="text/javascript" src="{% static "js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js" %}"></script>
-<!-- BLOCK UI -->
-<script type="text/javascript" src="{% static "js/jQuery-BlockUI/jquery.blockUI.min.js" %}"></script>
-<!-- DATA TABLES -->
-<script type="text/javascript" src="{% static "js/datatables/media/js/jquery.dataTables.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/datatables/media/assets/js/datatables.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/datatables/extras/TableTools/media/js/TableTools.min.js" %}"></script>
-<script type="text/javascript"
-        src="{% static "js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js" %}"></script>
-<!-- COOKIE -->
-<script type="text/javascript" src="{% static "js/jQuery-Cookie/jquery.cookie.min.js" %}"></script>
-<!-- CUSTOM SCRIPT -->
-<script src="{% static "js/script.js" %}"></script>
-<script>
-    jQuery(document).ready(function () {
-        App.setPage("dynamic_table");  //Set current page
-        App.init(); //Initialise plugins and elements
-    });
-</script>
-<!-- /JAVASCRIPTS -->
 </body>
 </html>
