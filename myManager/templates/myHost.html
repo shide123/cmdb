@@ -656,13 +656,7 @@
             <div id="search-bar">
                 <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
             </div>
-            <!-- /SEARCH BAR -->
 
-            <!-- SIDEBAR QUICK-LAUNCH -->
-            <!-- <div id="quicklaunch">
-            <!-- /SIDEBAR QUICK-LAUNCH -->
-
-            <!-- SIDEBAR MENU -->
             <ul>
                 <li>
                     <a href="index.html">
@@ -838,212 +832,225 @@
     </div>
     <!-- /SIDEBAR -->
     <div id="main-content" class="">
-			<!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
-			<div class="modal fade" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					  <h4 class="modal-title">Box Settings</h4>
-					</div>
-					<div class="modal-body">
-					  Here goes box setting content.
-					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					  <button type="button" class="btn btn-primary">Save changes</button>
-					</div>
-				  </div>
-				</div>
-			  </div>
-			<!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
-			<div class="container">
-				<div class="row">
-					<div id="content" class="col-lg-12" style="min-height:889px !important">
-						<!-- PAGE HEADER-->
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="page-header">
-									<!-- STYLER -->
+        <!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+        <div class="modal fade" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Box Settings</h4>
+                    </div>
+                    <div class="modal-body">
+                        Here goes box setting content.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+        <div class="container">
+            <div class="row">
+                <div id="content" class="col-lg-12" style="min-height:889px !important">
+                    <!-- PAGE HEADER-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-header">
+                                <!-- STYLER -->
 
-									<!-- /STYLER -->
-									<!-- BREADCRUMBS -->
-									<ul class="breadcrumb">
-										<li>
-											<i class="fa fa-home"></i>
-											<a href="index.html">Home</a>
-										</li>
-										<li>
-											<a href="#">Tables</a>
-										</li>
-										<li>Dynamic Tables</li>
-									</ul>
-									<!-- /BREADCRUMBS -->
-									<div class="clearfix">
-										<h3 class="content-title pull-left">服务器管理</h3>
-									</div>
+                                <!-- /STYLER -->
+                                <!-- BREADCRUMBS -->
+                                <ul class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-home"></i>
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Tables</a>
+                                    </li>
+                                    <li>Dynamic Tables</li>
+                                </ul>
+                                <!-- /BREADCRUMBS -->
+                                <div class="clearfix">
+                                    <h3 class="content-title pull-left">服务器管理</h3>
+                                </div>
 
-								</div>
-							</div>
-						</div>
-						<!-- /PAGE HEADER -->
-						<!-- DATA TABLES -->
-						<div class="row">
-							<div class="col-md-12">
-								<!-- BOX -->
-								<div class="box border green">
-									<div class="box-title">
-										<h4><i class="fa fa-table"></i>物理机列表</h4>
-										<div class="tools hidden-xs">
-											<a href="#box-config" data-toggle="modal" class="config">
-												<i class="fa fa-cog"></i>
-											</a>
-											<a href="javascript:;" class="reload">
-												<i class="fa fa-refresh"></i>
-											</a>
-											<a href="javascript:;" class="collapse">
-												<i class="fa fa-chevron-up"></i>
-											</a>
-											<a href="javascript:;" class="remove">
-												<i class="fa fa-times"></i>
-											</a>
-										</div>
-									</div>
-									<div class="box-body">
-										<div id="datatable1_wrapper" class="dataTables_wrapper form-inline" role="grid"><div class="row"><div class="col-sm-12"><div class="pull-right"><div class="dataTables_filter" id="datatable1_filter"><label><input type="text" aria-controls="datatable1" placeholder="Search" class="form-control input-sm"></label></div></div><div class="pull-left"><div id="datatable1_length" class="dataTables_length"><label>Show <select size="1" name="datatable1_length" aria-controls="datatable1" class="form-control input-sm"><option value="10" selected="selected">10</option></select> Rows</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /PAGE HEADER -->
+                    <!-- DATA TABLES -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BOX -->
+                            <div class="box border green">
+                                <div class="box-title">
+                                    <h4><i class="fa fa-table"></i>物理机列表</h4>
+                                    <div class="tools hidden-xs">
+                                        <a href="#box-config" data-toggle="modal" class="config">
+                                            <i class="fa fa-cog"></i>
+                                        </a>
+                                        <a href="javascript:;" class="reload">
+                                            <i class="fa fa-refresh"></i>
+                                        </a>
+                                        <a href="javascript:;" class="collapse">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a href="javascript:;" class="remove">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div id="datatable1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="pull-right">
+                                                    <div class="dataTables_filter" id="datatable1_filter"><label><input
+                                                            type="text" aria-controls="datatable1" placeholder="Search"
+                                                            class="form-control input-sm"></label></div>
+                                                </div>
+                                                <div class="pull-left">
+                                                    <div id="datatable1_length" class="dataTables_length"><label>Show
+                                                        <select size="1" name="datatable1_length"
+                                                                aria-controls="datatable1"
+                                                                class="form-control input-sm">
+                                                            <option value="10" selected="selected">10</option>
+                                                        </select> Rows</label>
 
-<label>
+                                                        <label>
 
-&nbsp;&nbsp;&nbsp;<button class="btn btn-info">添加</button>
-</label>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <button class="btn btn-info"
+                                                                    onclick="javascript:window.location.href='{% url 'myhost:addphy' %}'"
+                                                            >添加
+                                                            </button>
+                                                        </label>
 
-</div>
-</div><div class="clearfix"></div></div></div><table id="datatable1" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered table-hover dataTable" aria-describedby="datatable1_info">
-											                                            <thead>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <table id="datatable1" cellpadding="0" cellspacing="0" border="0"
+                                               class="datatable table table-striped table-bordered table-hover dataTable"
+                                               aria-describedby="datatable1_info">
+                                            <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="datatable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">物理IP
+                                                <th class="sorting_asc" role="columnheader" tabindex="0"
+                                                    aria-controls="datatable1" rowspan="1" colspan="1"
+                                                    aria-sort="ascending"
+                                                    aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 150px;">物理IP
                                                 </th>
-                                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 202px;">地址
+                                                <th class="sorting" role="columnheader" tabindex="0"
+                                                    aria-controls="datatable1" rowspan="1" colspan="1"
+                                                    aria-label="Browser: activate to sort column ascending"
+                                                    style="width: 202px;">地址
                                                 </th>
-                                                <th class="hidden-xs sorting" role="columnheader" tabindex="0" aria-controls="datatable1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 182px;">类型
+                                                <th class="hidden-xs sorting" role="columnheader" tabindex="0"
+                                                    aria-controls="datatable1" rowspan="1" colspan="1"
+                                                    aria-label="Platform(s): activate to sort column ascending"
+                                                    style="width: 182px;">类型
                                                 </th>
-                                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 127px;">下属虚拟机
+                                                <th class="sorting" role="columnheader" tabindex="0"
+                                                    aria-controls="datatable1" rowspan="1" colspan="1"
+                                                    aria-label="Engine version: activate to sort column ascending"
+                                                    style="width: 127px;">下属虚拟机
                                                 </th>
-                                                <th class="hidden-xs sorting" role="columnheader" tabindex="0" aria-controls="datatable1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 87px;">配置信息
+                                                <th class="hidden-xs sorting" role="columnheader" tabindex="0"
+                                                    aria-controls="datatable1" rowspan="1" colspan="1"
+                                                    aria-label="CSS grade: activate to sort column ascending"
+                                                    style="width: 87px;">配置信息
                                                 </th>
                                             </tr>
                                             </thead>
-
-
-
-										                                            <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="physical_list">
-                                                    <td class=" sorting_1" ,="" name="physicalip" id="physicalip">
+                                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                            {% for physical in all_physical.object_list %}
+                                                <tr class="physical_list">
+                                                    <td class=" sorting_1" , name="physicalip" id="physicalip">
                                                         <a href="{% url 'myhost:phyhost_detail' physical.physicalIp %}"> </a>
                                                         {{ physical.physicalIp }}}
                                                     </td>
                                                     <td class=" ">{{ physical.machineRoom_address }}}</td>
-                                                    <td class="hidden-xs ">{{ physical.machineRoom_attr }}}/td&gt;
-                                                    </td><td class="center ">
+                                                    <td class="hidden-xs ">{{ physical.machineRoom_attr }}}
+                                                    </td>
+                                                    <td class="center ">
                                                         <a href="{% url 'myhost:virhost_list' physical.physicalIp %}"> </a>
                                                         查看详情
                                                     </td>
                                                     <td class="center hidden-xs ">{{ physical.machine_info }}}</td>
-                                                </tr></tbody>
-                                            {% for physical in all_physical.object_list %}
-
+                                                </tr>
                                             {% endfor %}
-                                            </table><div class="row"><div class="col-sm-12"><div class="pull-left"><div class="dataTables_info" id="datatable1_info">Showing X to xx of xxx entries</div></div><div class="pull-right"><div class="dataTables_paginate paging_bs_full" id="datatable1_paginate">
-    <ul class="pagination">
-     {% if all_physical.has_previous %}
-        <li class="disabled">
-            <a href="?{{ all_physical.previous_page_number.querystring }}" tabindex="0" class="paginate_button previous" id="datatable1_previous">
-                Previous
-            </a>
-        </li>
-    {% endif %}
-    {% for page in all_physical.pages %}
-    {% if page %}
-      {% ifequal page all_physical.number %}
-        <li class="active">
-            <a tabindex="0" href="?{{ page.querystring}}" class="page">{{ page }}
-            </a>
-        </li>
-    {% else %}
-    	<li>
-            <a href="?{{ page.querystring }}" class="page">{{ page }}
-            </a>
-    </li>
-			{% endifequal %}
-                  {% else %}
-                    <li class="none"><a href="">...</a></li>
-                  {% endif %}
-                {% endfor %}
-                {% if all_physical.has_next %}
-    <li>
-            <a href="?{{ all_physical.next_page_number.querystring }}" tabindex="0" class="paginate_button next" id="datatable1_next">
-                Next</a>
-        </li>
-    </ul>
-</div></div><div class="clearfix"></div></div></div></div>
-									</div>
-								</div>
-								<!-- /BOX -->
-							</div>
-						</div>
-						<!-- /DATA TABLES -->
-
-
-
-
-
-
-
-
-
-
-						<!-- /EXPORT TABLES -->
-
-					</div><!-- /CONTENT-->
-				</div>
-			</div>
-		</div>
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="pull-left">
+                                                    <div class="dataTables_info" id="datatable1_info">Showing X to xx of
+                                                        xxx entries
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <div class="dataTables_paginate paging_bs_full"
+                                                         id="datatable1_paginate">
+                                                        <ul class="pagination">
+                                                            {% if all_physical.has_previous %}
+                                                                <li class="disabled">
+                                                                    <a href="?{{ all_physical.previous_page_number.querystring }}"
+                                                                       tabindex="0" class="paginate_button previous"
+                                                                       id="datatable1_previous">
+                                                                        Previous
+                                                                    </a>
+                                                                </li>
+                                                            {% endif %}
+                                                            {% for page in all_physical.pages %}
+                                                                {% if page %}
+                                                                    {% ifequal page all_physical.number %}
+                                                                        <li class="active">
+                                                                            <a tabindex="0"
+                                                                               href="?{{ page.querystring }}"
+                                                                               class="page">{{ page }}
+                                                                            </a>
+                                                                        </li>
+                                                                    {% else %}
+                                                                        <li>
+                                                                            <a href="?{{ page.querystring }}"
+                                                                               class="page">{{ page }}
+                                                                            </a>
+                                                                        </li>
+                                                                    {% endifequal %}
+                                                                {% else %}
+                                                                    <li class="none"><a href="">...</a></li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            {% if all_physical.has_next %}
+                                                                <li>
+                                                                    <a href="?{{ all_physical.next_page_number.querystring }}"
+                                                                       tabindex="0" class="paginate_button next"
+                                                                       id="datatable1_next">
+                                                                        Next</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-<!--/PAGE -->
-<!-- JAVASCRIPTS -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!-- JQUERY -->
-<script src="{% static "js/jquery/jquery-2.0.3.min.js" %}"></script>
-<!-- JQUERY UI-->
-<script src="{% static "js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js" %}"></script>
-<!-- BOOTSTRAP -->
-<script src="{% static "bootstrap-dist/js/bootstrap.min.js" %}"></script>
 
-
-<!-- DATE RANGE PICKER -->
-<script src="{% static "js/bootstrap-daterangepicker/moment.min.js" %}"></script>
-
-<script src="{% static "js/bootstrap-daterangepicker/daterangepicker.min.js" %}"></script>
-<!-- SLIMSCROLL -->
-<script type="text/javascript" src="{% static "js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js" %}"></script>
-<!-- BLOCK UI -->
-<script type="text/javascript" src="{% static "js/jQuery-BlockUI/jquery.blockUI.min.js" %}"></script>
-<!-- DATA TABLES -->
-<script type="text/javascript" src="{% static "js/datatables/media/js/jquery.dataTables.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/datatables/media/assets/js/datatables.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/datatables/extras/TableTools/media/js/TableTools.min.js" %}"></script>
-<script type="text/javascript"
-        src="{% static "js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js" %}"></script>
-<!-- COOKIE -->
-<script type="text/javascript" src="{% static "js/jQuery-Cookie/jquery.cookie.min.js" %}"></script>
-<!-- CUSTOM SCRIPT -->
-<script src="{% static "js/script.js" %}"></script>
-<script>
-    jQuery(document).ready(function () {
-        App.setPage("dynamic_table");  //Set current page
-        App.init(); //Initialise plugins and elements
-    });
-</script>
-<!-- /JAVASCRIPTS -->
 </body>
 </html>

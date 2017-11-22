@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Cloud Admin | Forms</title>
+    <title>Cloud Admin | Dynamic Tables</title>
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
@@ -11,31 +11,42 @@
     <!-- STYLESHEETS -->
     <!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="{% staitc "css/cloud-admin.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% sattic "css/themes/default.css" %}" id="skin-switcher">
+    <link rel="stylesheet" type="text/css" href="{% static "css/cloud-admin.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/themes/default.css" %}" id="skin-switcher">
     <link rel="stylesheet" type="text/css" href="{% static "css/responsive.css" %}">
 
     <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+    <!-- JQUERY UI-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static "js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" %}"/>
     <!-- DATE RANGE PICKER -->
     <link rel="stylesheet" type="text/css" href="{% static "js/bootstrap-daterangepicker/daterangepicker-bs3.css" %}"/>
-    <!-- TYPEAHEAD -->
-    <link rel="stylesheet" type="text/css" href="{% static "js/typeahead/typeahead.css" %}"/>
-    <!-- FILE UPLOAD -->
-    <link rel="stylesheet" type="text/css" href="{% static "js/bootstrap-fileupload/bootstrap-fileupload.min.css" %}"/>
-    <!-- SELECT2 -->
-    <link rel="stylesheet" type="text/css" href="{% static "js/select2/select2.min.css" %}"/>
-    <!-- UNIFORM -->
-    <link rel="stylesheet" type="text/css" href="{% static "js/uniform/css/uniform.default.min.css" %}"/>
-    <!-- JQUERY UPLOAD -->
-    <!-- blueimp Gallery styles -->
-    <link rel="stylesheet" href="{% static "js/blueimp/gallery/blueimp-gallery.min.css" %}">
-    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="{% static "js/jquery-upload/css/jquery.fileupload.css" %}">
-    <link rel="stylesheet" href="{% static "js/jquery-upload/css/jquery.fileupload-ui.css" %}">
+    <!-- DATA TABLES -->
+    <link rel="stylesheet" type="text/css" href="{% static "js/datatables/media/css/jquery.dataTables.min.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "js/datatables/media/assets/css/datatables.min.css" %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static "js/datatables/extras/TableTools/media/css/TableTools.min.css" %}"/>
     <!-- FONTS -->
-    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
 </head>
 <body>
+<script type="text/javascript">
+    gethost = function () {
+         var physicalIp =$('#physicalIp_input').val()
+        $.ajax({
+            url: '{% url 'myhost:machineinfo' %}',
+            type: 'POST',
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+</script>
 <!-- HEADER -->
 <header class="navbar clearfix" id="header">
     <div class="container">
@@ -201,13 +212,12 @@
 										<span class="from">Jane Doe</span>
 										<span class="message">
 										Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse mole ...
-										</span> 
+										</span>
 										<span class="time">
 											<i class="fa fa-clock-o"></i>
 											<span>Just Now</span>
 										</span>
 									</span>
-
                         </a>
                     </li>
                     <li>
@@ -217,7 +227,7 @@
 										<span class="from">Vince Pelt</span>
 										<span class="message">
 										Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse mole ...
-										</span> 
+										</span>
 										<span class="time">
 											<i class="fa fa-clock-o"></i>
 											<span>15 min ago</span>
@@ -233,7 +243,7 @@
 										<span class="from">Debby Doe</span>
 										<span class="message">
 										Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse mole ...
-										</span> 
+										</span>
 										<span class="time">
 											<i class="fa fa-clock-o"></i>
 											<span>2 hours ago</span>
@@ -662,296 +672,370 @@
             <!-- SEARCH BAR -->
             <div id="search-bar">
                 <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
-                <ul>
-                    <li>
-                        <a href="index.html">
-                            <i class="fa fa-tachometer fa-fw"></i> <span class="menu-text">Dashboard</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                    <li class="has-sub">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">UI Features</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" href="elements.html"><span class="sub-menu-text">Elements</span></a></li>
-                            <li><a class="" href="notifications.html"><span
-                                    class="sub-menu-text">Hubspot Notifications</span></a></li>
-                            <li><a class="" href="buttons_icons.html"><span class="sub-menu-text">Buttons & Icons</span></a>
-                            </li>
-                            <li><a class="" href="sliders_progress.html"><span
-                                    class="sub-menu-text">Sliders & Progress</span></a></li>
-                            <li><a class="" href="typography.html"><span class="sub-menu-text">Typography</span></a>
-                            </li>
-                            <li><a class="" href="tabs_accordions.html"><span
-                                    class="sub-menu-text">Tabs & Accordions</span></a></li>
-                            <li><a class="" href="treeview.html"><span class="sub-menu-text">Treeview</span></a></li>
-                            <li><a class="" href="nestable_lists.html"><span class="sub-menu-text">Nestable Lists</span></a>
-                            </li>
-                            <li class="has-sub-sub">
-                                <a href="javascript:;" class=""><span class="sub-menu-text">Third Level Menu</span>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-sub">
-                                    <li><a class="" href="#"><span class="sub-sub-menu-text">Item 1</span></a></li>
-                                    <li><a class="" href="#"><span class="sub-sub-menu-text">Item 2</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="" href="frontend_theme/index.html" target="_blank"><i class="fa fa-desktop fa-fw"></i>
-                        <span class="menu-text">Frontend Theme</span></a></li>
-                    <li><a class="" href="inbox.html"><i class="fa fa-envelope-o fa-fw"></i> <span class="menu-text">Inbox</span></a>
-                    </li>
-                    <li class="has-sub">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-table fa-fw"></i> <span class="menu-text">Tables</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" href="simple_table.html"><span
-                                    class="sub-menu-text">Simple Tables</span></a></li>
-                            <li><a class="" href="myHost.html"><span class="sub-menu-text">Dynamic Tables</span></a>
-                            </li>
-                            <li><a class="" href="jqgrid_plugin.html"><span
-                                    class="sub-menu-text">jqGrid Plugin</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="has-sub active">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-pencil-square-o fa-fw"></i> <span class="menu-text">Form Elements</span>
-                            <span class="arrow open"></span>
-                            <span class="selected"></span>
-                        </a>
-                        <ul class="sub">
-                            <li class="current"><a class="" href="forms.html"><span
-                                    class="sub-menu-text">Forms</span></a></li>
-                            <li><a class="" href="wizards_validations.html"><span class="sub-menu-text">Wizards & Validations</span></a>
-                            </li>
-                            <li><a class="" href="rich_text_editors.html"><span
-                                    class="sub-menu-text">Rich Text Editors</span></a></li>
+            </div>
 
-                            <li><a class="" href="dropzone_file_upload.html"><span class="sub-menu-text">Dropzone File Upload</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="" href="widgets_box.html"><i class="fa fa-th-large fa-fw"></i> <span
-                            class="menu-text">Widgets & Box</span></a></li>
-                    <li class="has-sub">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> <span class="menu-text">Visual Charts</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" href="flot_charts.html"><span class="sub-menu-text">Flot Charts</span></a>
-                            </li>
-                            <li><a class="" href="xcharts.html"><span class="sub-menu-text">xCharts</span></a></li>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <i class="fa fa-tachometer fa-fw"></i> <span class="menu-text">Dashboard</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">UI Features</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="elements.html"><span class="sub-menu-text">Elements</span></a></li>
+                        <li><a class="" href="notifications.html"><span
+                                class="sub-menu-text">Hubspot Notifications</span></a></li>
+                        <li><a class="" href="buttons_icons.html"><span class="sub-menu-text">Buttons & Icons</span></a>
+                        </li>
+                        <li><a class="" href="sliders_progress.html"><span
+                                class="sub-menu-text">Sliders & Progress</span></a></li>
+                        <li><a class="" href="typography.html"><span class="sub-menu-text">Typography</span></a></li>
+                        <li><a class="" href="tabs_accordions.html"><span class="sub-menu-text">Tabs & Accordions</span></a>
+                        </li>
+                        <li><a class="" href="treeview.html"><span class="sub-menu-text">Treeview</span></a></li>
+                        <li><a class="" href="nestable_lists.html"><span class="sub-menu-text">Nestable Lists</span></a>
+                        </li>
+                        <li class="has-sub-sub">
+                            <a href="javascript:;" class=""><span class="sub-menu-text">Third Level Menu</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-sub">
+                                <li><a class="" href="#"><span class="sub-sub-menu-text">Item 1</span></a></li>
+                                <li><a class="" href="#"><span class="sub-sub-menu-text">Item 2</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="frontend_theme/index.html" target="_blank"><i class="fa fa-desktop fa-fw"></i>
+                    <span class="menu-text">Frontend Theme</span></a></li>
+                <li><a class="" href="inbox.html"><i class="fa fa-envelope-o fa-fw"></i> <span
+                        class="menu-text">Inbox</span></a></li>
+                <li class="has-sub active">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-table fa-fw"></i> <span class="menu-text">hosts</span>
+                        <span class="arrow open"></span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="{% url 'myhost:phyhost_list' %}"><span class="sub-menu-text">physicalmachine</span></a>
+                        </li>
+                        <li class="current"><a class="" href="{% url 'myhost:virhost_list' %}"><span
+                                class="sub-menu-text">virmachine</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-pencil-square-o fa-fw"></i> <span class="menu-text">Form Elements</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="forms.html"><span class="sub-menu-text">Forms</span></a></li>
+                        <li><a class="" href="wizards_validations.html"><span class="sub-menu-text">Wizards & Validations</span></a>
+                        </li>
+                        <li><a class="" href="rich_text_editors.html"><span
+                                class="sub-menu-text">Rich Text Editors</span></a></li>
 
-                            <li><a class="" href="others.html"><span class="sub-menu-text">Others</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="has-sub">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-columns fa-fw"></i> <span class="menu-text">Layouts</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" href="mini_sidebar.html"><span class="sub-menu-text">Mini Sidebar</span></a>
-                            </li>
-                            <li><a class="" href="fixed_header.html"><span class="sub-menu-text">Fixed Header</span></a>
-                            </li>
+                        <li><a class="" href="dropzone_file_upload.html"><span class="sub-menu-text">Dropzone File Upload</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="widgets_box.html"><i class="fa fa-th-large fa-fw"></i> <span class="menu-text">Widgets & Box</span></a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> <span class="menu-text">Visual Charts</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="flot_charts.html"><span class="sub-menu-text">Flot Charts</span></a></li>
+                        <li><a class="" href="xcharts.html"><span class="sub-menu-text">xCharts</span></a></li>
 
-                            <li><a class="" href="fixed_header_sidebar.html"><span class="sub-menu-text">Fixed Header & Sidebar</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="" href="calendar.html"><i class="fa fa-calendar fa-fw"></i>
-                        <span class="menu-text">Calendar
+                        <li><a class="" href="others.html"><span class="sub-menu-text">Others</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-columns fa-fw"></i> <span class="menu-text">Layouts</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="mini_sidebar.html"><span class="sub-menu-text">Mini Sidebar</span></a>
+                        </li>
+                        <li><a class="" href="fixed_header.html"><span class="sub-menu-text">Fixed Header</span></a>
+                        </li>
+
+                        <li><a class="" href="fixed_header_sidebar.html"><span class="sub-menu-text">Fixed Header & Sidebar</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="calendar.html"><i class="fa fa-calendar fa-fw"></i>
+                    <span class="menu-text">Calendar
 									<span class="tooltip-error pull-right" title="" data-original-title="3 New Events">
 										<span class="label label-success">New</span>
 									</span>
 								</span>
+                </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-map-marker fa-fw"></i> <span class="menu-text">Maps</span>
+                        <span class="arrow"></span>
                     </a>
-                    </li>
-                    <li class="has-sub">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-map-marker fa-fw"></i> <span class="menu-text">Maps</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" href="google_maps.html"><span class="sub-menu-text">Google Maps</span></a>
-                            </li>
-                            <li><a class="" href="vector_maps.html"><span class="sub-menu-text">Vector Maps</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="" href="gallery.html"><i class="fa fa-picture-o fa-fw"></i> <span class="menu-text">Gallery</span></a>
-                    </li>
-                    <li class="has-sub">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-file-text fa-fw"></i> <span class="menu-text">More Pages</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" href="login.html"><span
-                                    class="sub-menu-text">Login & Register Option 1</span></a></li>
-                            <li><a class="" href="login_bg.html"><span
-                                    class="sub-menu-text">Login & Register Option 2</span></a></li>
-                            <li><a class="" href="user_profile.html"><span class="sub-menu-text">User profile</span></a>
-                            </li>
+                    <ul class="sub">
+                        <li><a class="" href="google_maps.html"><span class="sub-menu-text">Google Maps</span></a></li>
+                        <li><a class="" href="vector_maps.html"><span class="sub-menu-text">Vector Maps</span></a></li>
+                    </ul>
+                </li>
+                <li><a class="" href="gallery.html"><i class="fa fa-picture-o fa-fw"></i> <span class="menu-text">Gallery</span></a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-file-text fa-fw"></i> <span class="menu-text">More Pages</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="login.html"><span
+                                class="sub-menu-text">Login & Register Option 1</span></a></li>
+                        <li><a class="" href="login_bg.html"><span
+                                class="sub-menu-text">Login & Register Option 2</span></a></li>
+                        <li><a class="" href="user_profile.html"><span class="sub-menu-text">User profile</span></a>
+                        </li>
 
-                            <li><a class="" href="chats.html"><span class="sub-menu-text">Chats</span></a></li>
-                            <li><a class="" href="todo_timeline.html"><span class="sub-menu-text">Todo & Timeline</span></a>
-                            </li>
-                            <li><a class="" href="address_book.html"><span class="sub-menu-text">Address Book</span></a>
-                            </li>
+                        <li><a class="" href="chats.html"><span class="sub-menu-text">Chats</span></a></li>
+                        <li><a class="" href="todo_timeline.html"><span class="sub-menu-text">Todo & Timeline</span></a>
+                        </li>
+                        <li><a class="" href="address_book.html"><span class="sub-menu-text">Address Book</span></a>
+                        </li>
 
-                            <li><a class="" href="pricing.html"><span class="sub-menu-text">Pricing</span></a></li>
-                            <li><a class="" href="invoice.html"><span class="sub-menu-text">Invoice</span></a></li>
-                            <li><a class="" href="orders.html"><span class="sub-menu-text">Orders</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="has-sub">
-                        <a href="javascript:;" class="">
-                            <i class="fa fa-briefcase fa-fw"></i> <span class="menu-text">Other Pages <span
-                                class="badge pull-right">9</span></span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" href="search_results.html"><span class="sub-menu-text">Search Results</span></a>
-                            </li>
-                            <li><a class="" href="email_templates.html"><span
-                                    class="sub-menu-text">Email Templates</span></a></li>
+                        <li><a class="" href="pricing.html"><span class="sub-menu-text">Pricing</span></a></li>
+                        <li><a class="" href="invoice.html"><span class="sub-menu-text">Invoice</span></a></li>
+                        <li><a class="" href="orders.html"><span class="sub-menu-text">Orders</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-briefcase fa-fw"></i> <span class="menu-text">Other Pages <span
+                            class="badge pull-right">9</span></span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="search_results.html"><span class="sub-menu-text">Search Results</span></a>
+                        </li>
+                        <li><a class="" href="email_templates.html"><span
+                                class="sub-menu-text">Email Templates</span></a></li>
 
-                            <li><a class="" href="error_404.html"><span class="sub-menu-text">Error 404 Option 1</span></a>
-                            </li>
-                            <li><a class="" href="error_404_2.html"><span
-                                    class="sub-menu-text">Error 404 Option 2</span></a></li>
-                            <li><a class="" href="error_404_3.html"><span
-                                    class="sub-menu-text">Error 404 Option 3</span></a></li>
-                            <li><a class="" href="error_500.html"><span class="sub-menu-text">Error 500 Option 1</span></a>
-                            </li>
-                            <li><a class="" href="error_500_2.html"><span
-                                    class="sub-menu-text">Error 500 Option 2</span></a></li>
-                            <li><a class="" href="faq.html"><span class="sub-menu-text">FAQ</span></a></li>
-                            <li><a class="" href="blank_page.html"><span class="sub-menu-text">Blank Page</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- /SIDEBAR MENU -->
-            </div>
+                        <li><a class="" href="error_404.html"><span class="sub-menu-text">Error 404 Option 1</span></a>
+                        </li>
+                        <li><a class="" href="error_404_2.html"><span
+                                class="sub-menu-text">Error 404 Option 2</span></a></li>
+                        <li><a class="" href="error_404_3.html"><span
+                                class="sub-menu-text">Error 404 Option 3</span></a></li>
+                        <li><a class="" href="error_500.html"><span class="sub-menu-text">Error 500 Option 1</span></a>
+                        </li>
+                        <li><a class="" href="error_500_2.html"><span
+                                class="sub-menu-text">Error 500 Option 2</span></a></li>
+                        <li><a class="" href="faq.html"><span class="sub-menu-text">FAQ</span></a></li>
+                        <li><a class="" href="blank_page.html"><span class="sub-menu-text">Blank Page</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /SIDEBAR MENU -->
         </div>
-        <!-- /SIDEBAR -->
-        <div id="main-content">
-            <!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
-            <div class="modal fade" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Box Settings</h4>
-                        </div>
-                        <div class="modal-body">
-                            Here goes box setting content.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+    </div>
+    <!-- /SIDEBAR -->
+    <div id="main-content" class="">
+        <!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
+        <div class="modal fade" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Box Settings</h4>
+                    </div>
+                    <div class="modal-body">
+                        Here goes box setting content.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+        <div class="container">
+            <div class="row">
+                <div id="content" class="col-lg-12" style="min-height:918px !important">
+                    <!-- PAGE HEADER-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-header">
+                                <!-- STYLER -->
 
-            <div class="container">
-                <div class="row">
-                    <div id="content" class="col-lg-12">
-                        <div class="box-body">
-                            <form class="form-horizontal " action="#">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Inputs</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Text input">
-                                    </div>
+                                <!-- /STYLER -->
+                                <!-- BREADCRUMBS -->
+                                <ul class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-home"></i>
+                                        <a href="index.html">首页</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">服务器管理</a>
+                                    </li>
+                                    <li>我是物理机</li>
+                                </ul>
+                                <!-- /BREADCRUMBS -->
+                                <div class="clearfix">
+                                    <h3 class="content-title pull-left">我是物理机表单</h3>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label" for="s2id_autogen1">Basic Select</label>
-                                    <div class="col-md-10">
-                                        <div class="select2-container col-md-12" id="s2id_e1"><a
-                                                href="javascript:void(0)" onclick="return false;" class="select2-choice"
-                                                tabindex="-1"> <span class="select2-chosen"></span><abbr
-                                                class="select2-search-choice-close"></abbr> <span class="select2-arrow"><b></b></span></a><input
-                                                class="select2-focusser select2-offscreen" type="text"
-                                                id="s2id_autogen1">
-                                        </div>
-                                        <select id="e1" class="col-md-12 select2-offscreen" tabindex="-1">
-                                            <option>Wyoming</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label" for="s2id_autogen1">Basic Select</label>
-                                    <div class="col-md-10">
-                                        <div class="select2-container col-md-12" id="s2id_e1"><a
-                                                href="javascript:void(0)" onclick="return false;" class="select2-choice"
-                                                tabindex="-1"> <span class="select2-chosen"></span><abbr
-                                                class="select2-search-choice-close"></abbr> <span class="select2-arrow"><b></b></span></a><input
-                                                class="select2-focusser select2-offscreen" type="text"
-                                                id="s2id_autogen1"></div>
-                                        <select id="e1" class="col-md-12 select2-offscreen" tabindex="-1">
-                                            <option>Wyoming</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label" for="s2id_autogen8">Tagging Support</label>
-                                    <div class="col-md-10">
-                                        <div class="select2-container select2-container-multi col-md-12" id="s2id_e8">
-                                            <ul class="select2-choices">
-                                                <li class="select2-search-choice">
-                                                    <div>brown</div>
-                                                    <a href="#" onclick="return false;"
-                                                       class="select2-search-choice-close" tabindex="-1"></a></li>
-                                                <li class="select2-search-choice">
-                                                    <div>red</div>
-                                                    <a href="#" onclick="return false;"
-                                                       class="select2-search-choice-close" tabindex="-1"></a></li>
-                                                <li class="select2-search-choice">
-                                                    <div>green</div>
-                                                    <a href="#" onclick="return false;"
-                                                       class="select2-search-choice-close" tabindex="-1"></a></li>
-                                                <li class="select2-search-field"><input type="text" autocomplete="off"
-                                                                                        autocorrect="off"
-                                                                                        autocapitalize="off"
-                                                                                        spellcheck="false"
-                                                                                        class="select2-input"
-                                                                                        id="s2id_autogen8"
-                                                                                        style="width: 20px;"></li>
-                                            </ul>
-                                            <div class="select2-drop select2-drop-multi select2-display-none">
-                                                <ul class="select2-results"></ul>
+                                <div class="description">我是物理IP或者“添加物理机”</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /PAGE HEADER -->
+                    <!-- FORMS -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- BASIC -->
+                                    <div class="box border orange">
+                                        <div class="box-title">
+                                            <h4><i class="fa fa-bars"></i>我是物理机</h4>
+                                            <div class="tools hidden-xs">
+                                                <a href="#box-config" data-toggle="modal" class="config">
+                                                    <i class="fa fa-cog"></i>
+                                                </a>
+                                                <a href="javascript:;" class="reload">
+                                                    <i class="fa fa-refresh"></i>
+                                                </a>
+                                                <a href="javascript:;" class="collapse">
+                                                    <i class="fa fa-chevron-up"></i>
+                                                </a>
+                                                <a href="javascript:;" class="remove">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="e8" class="col-md-12 select2-offscreen"
-                                               value="brown,red,green" tabindex="-1">
+                                        <div class="box-body">
+
+                                            <form class="form-horizontal" role="form"
+                                                  action="{% url 'myhost:addphy' %} method='post'">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">物理机IP</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Text input" id="physicalIp_input"
+                                                               name="physicalIp_input">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">地址</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Text input" id="machineRoom_address"
+                                                               name="machineRoom_address">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">机房类型</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Text input" id="machineRoom_attr"
+                                                               name="machineRoom_attr">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">机器详情</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea class="form-control" rows="3" id="machine_info_input"
+                                                                  name="machine_info_input"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <button type="button" class="btn btn-inverse"
+                                                            onclick="gethost();">
+                                                        <span>获取详情</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label"
+                                                           for="s2id_autogen8">下属虚拟机</label>
+                                                    <div class="col-md-10">
+                                                        <div class="select2-container select2-container-multi col-md-12"
+                                                             id="s2id_e8">
+                                                            <ul class="select2-choices">
+                                                                <li class="select2-search-field"><input type="text"
+                                                                                                        autocomplete="off"
+                                                                                                        autocorrect="off"
+                                                                                                        autocapitalize="off"
+                                                                                                        spellcheck="false"
+                                                                                                        class="select2-input"
+                                                                                                        id="s2id_autogen8"
+                                                                                                        style="width: 20px;">
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <input type="hidden" id="e8"
+                                                               class="col-md-12 select2-offscreen" value=""
+                                                               tabindex="-1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <button type="submit" class="btn btn-primary start">
+                                                        <i class="fa fa-arrow-circle-o-up"></i>
+                                                        <span>提交</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                        <span>删除</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-success tip-right">
+                                                        <i class="fa fa-arrow-circle-o-up"></i>
+                                                        <span>取消</span>
+                                                    </button>
+                                                </div>
+
+                                            </form>
+
+
+                                        </div>
                                     </div>
+
+
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Textarea</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" rows="3"></textarea>
-                                    </div>
-                                </div>
-                            </form>
+
+                            </div>
+
+
                         </div>
-
                     </div>
+                    <!-- /FORMS -->
 
-                </div>
+                    <!-- ADVANCED -->
+
+                    <!-- /ADVANCED -->
+                    <div class="separator"></div>
+                    <!-- SAMPLE -->
+
+                    <!-- /SAMPLE -->
+                    <div class="footer-tools">
+							<span class="go-top">
+								<i class="fa fa-chevron-up"></i> Top
+							</span>
+                    </div>
+                </div><!-- /CONTENT-->
             </div>
         </div>
+    </div>
 </section>
 <!--/PAGE -->
 <!-- JAVASCRIPTS -->
@@ -973,52 +1057,19 @@
 <script type="text/javascript" src="{% static "js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js" %}"></script>
 <!-- BLOCK UI -->
 <script type="text/javascript" src="{% static "js/jQuery-BlockUI/jquery.blockUI.min.js" %}"></script>
-<!-- TYPEHEAD -->
-<script type="text/javascript" src="{% static "js/typeahead/typeahead.min.js" %}"></script>
-<!-- AUTOSIZE -->
-<script type="text/javascript" src="{% static "js/autosize/jquery.autosize.min.js" %}"></script>
-<!-- COUNTABLE -->
-<script type="text/javascript" src="{% static "js/countable/jquery.simplyCountable.min.js" %}"></script>
-<!-- INPUT MASK -->
-<script type="text/javascript" src="{% static "js/bootstrap-inputmask/bootstrap-inputmask.min.js" %}"></script>
-<!-- FILE UPLOAD -->
-<script type="text/javascript" src="{% static "js/bootstrap-fileupload/bootstrap-fileupload.min.js" %}"></script>
-<!-- SELECT2 -->
-<script type="text/javascript" src="{% static "js/select2/select2.min.js" %}"></script>
-<!-- UNIFORM -->
-<script type="text/javascript" src="{% static "js/uniform/jquery.uniform.min.js" %}"></script>
-<!-- JQUERY UPLOAD -->
-<!-- The Templates plugin is included to render the upload/download listings -->
-<script src="{% static "js/blueimp/javascript-template/tmpl.min.js" %}"></script>
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="{% static "js/blueimp/javascript-loadimg/load-image.min.js" %}"></script>
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="{% static "js/blueimp/javascript-canvas-to-blob/canvas-to-blob.min.js" %}"></script>
-<!-- blueimp Gallery script -->
-<script src="{% static "js/blueimp/gallery/jquery.blueimp-gallery.min.js" %}"></script>
-<!-- The basic File Upload plugin -->
-<script src="{% static "js/jquery-upload/js/jquery.fileupload.min.js" %}"></script>
-<!-- The File Upload processing plugin -->
-<script src="{% static "js/jquery-upload/js/jquery.fileupload-process.min.js" %}"></script>
-<!-- The File Upload image preview & resize plugin -->
-<script src="{% static "js/jquery-upload/js/jquery.fileupload-image.min.js" %}"></script>
-<!-- The File Upload audio preview plugin -->
-<script src="{% static "js/jquery-upload/js/jquery.fileupload-audio.min.js" %}"></script>
-<!-- The File Upload video preview plugin -->
-<script src="{% static "js/jquery-upload/js/jquery.fileupload-video.min.js" %}"></script>
-<!-- The File Upload validation plugin -->
-<script src="{% static "js/jquery-upload/js/jquery.fileupload-validate.min.js" %}"></script>
-<!-- The File Upload user interface plugin -->
-<script src="{% static "js/jquery-upload/js/jquery.fileupload-ui.min.js" %}"></script>
-<!-- The main application script -->
-<script src="{% static "js/jquery-upload/js/main.js" %}"></script>
+<!-- DATA TABLES -->
+<script type="text/javascript" src="{% static "js/datatables/media/js/jquery.dataTables.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/datatables/media/assets/js/datatables.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/datatables/extras/TableTools/media/js/TableTools.min.js" %}"></script>
+<script type="text/javascript"
+        src="{% static "js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js" %}"></script>
 <!-- COOKIE -->
 <script type="text/javascript" src="{% static "js/jQuery-Cookie/jquery.cookie.min.js" %}"></script>
 <!-- CUSTOM SCRIPT -->
 <script src="{% static "js/script.js" %}"></script>
 <script>
     jQuery(document).ready(function () {
-        App.setPage("forms");  //Set current page
+        App.setPage("dynamic_table");  //Set current page
         App.init(); //Initialise plugins and elements
     });
 </script>

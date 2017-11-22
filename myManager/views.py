@@ -26,45 +26,48 @@ class RegisterView(View):
             if UserProfile.objects.filter(email=email):
                 return render(request, 'login.html', {'register_form': register_form, 'msg': '用户已经存在！'})
             password = request.POST.get('password', '')
-
             user_profile = UserProfile()
             user_profile.username = email
             user_profile.email = email
             user_profile.password = make_password(password)
             user_profile.is_active = False
             user_profile.save()
-
-            #注册时发送一条消息
+            # 注册时发送一条消息
             user_message = UserMessage()
             user_message.user = user_profile.id
             user_message.message = '欢迎注册'
             user_message.save()
             send_register_email(email, 'register')
             return render(request, 'send_success.html')
-
         return render(request, 'login.html', {'register_form': register_form})
+
 
 class LoginView(View):
     def get(self, request):
         return render(request, 'login.html')
+
     def post(self, request):
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
-            user_name = request.POST.get('username', '')
+            username = request.POST.get('username', '')
             password = request.POST.get('password', '')
-            user = authenticate(username=user_name, password=password)
+            user = authenticate(username=username, password=password)
             if user is not None:
-                if user.is_active:
+                if user.is_active == 1:
                     login(request, user)
-                    return HttpResponsePermanentRedirect(reversed('index'))
+                    response = HttpResponsePermanentRedirect(reversed('index'))
+                    response.set_cookie('username', username)
+                    return response
                 return render(request, 'login.html', {'msg': '用户未激活！'})
             return render(request, 'login.html', {'msg': '用户名或者密码错误！'})
         return render(request, 'login.html', {'form_errors': login_form.errors})
+
 
 class LogoutView(View):
     def get(self, request):
         logout(request)
         return HttpResponsePermanentRedirect(reverse('index'))
+
 
 class RestView(View):
     def get(self, request, active_code):
@@ -75,9 +78,12 @@ class RestView(View):
                 return render(request, 'login.html', {'email': email})
         return render(request, 'active_fail.html')
 
+
 class IndexView(View):
     def get(self, request):
-        return render(request, 'index.html')
+        username = request.COOKIES.get('username', '')
+        return render(request, 'index.html', {'username': username})
+
 
 class ModifyPwdView(View):
     def post(self, request):
@@ -87,34 +93,49 @@ class ModifyPwdView(View):
             pwd1 = request.POST.get('password1', '')
             pwd2 = request.POST.get('password2', '')
             if pwd1 != pwd2:
-                return render(request, 'login.html', {'email': email, 'msg':'密码不一致！'})
+                return render(request, 'login.html', {'email': email, 'msg': '密码不一致！'})
             user = UserProfile.objects.get(email=email)
             user = make_password(pwd2)
             user.save()
-            return render(request,'login.html')
+            return render(request, 'login.html')
         return render(request, 'login.html', {'email': email, 'modify_form': modify_form})
+
 
 class ForgetPwdView(View):
     def get(self, request):
         forget_form = ForgetForm()
-        return render(request, 'login.html', {'forget_form':forget_form})
+        return render(request, 'login.html', {'forget_form': forget_form})
 
-    def post(self,request):
+    def post(self, request):
         forget_form = ForgetForm(request.POST)
         if forget_form.is_valid():
-            email = request.POST.get('email','')
-            send_register_email(email,'forget')
+            email = request.POST.get('email', '')
+            send_register_email(email, 'forget')
             return render(request, 'send_success.html')
         return render(request, 'login.html', {'forget_form': forget_form})
+
+
+class ActiveUserView(View):
+    def get(self, request, active_code):
+        # 为什么用 filter ？ 因为用户可能注册了好多次，一个 email 对应了好多个 code
+        all_records = EmailVerifyRecord.objects.filter(code=active_code)
+        if all_records:
+            for records in all_records:
+                email = records.email
+                user = UserProfile.objects.get(email=email)
+                user.is_active = True
+                user.save()
+                return render(request, 'login.html')
+        return render(request, 'active_fail.html')
+
 
 def page_not_found(request):
     response = render_to_response('error_404.html', {})
     response.status_code = 404
     return response
 
+
 def page_error(request):
     response = render_to_response('error_500.html', {})
     response.status_code = 500
     return response
-
-

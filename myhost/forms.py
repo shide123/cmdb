@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from myhost.models import *
-
 from myhost.models import VirtualMachine
 
 
@@ -9,7 +8,7 @@ class PhysicalForm(forms.Form):
     physicalIp = forms.CharField(required=True)
     machineRoom_address = forms.CharField(required=True)
     machineRoom_attr = forms.CharField(required=True)
-    machine_info = forms.OneToOneField(required=True)
+    machine_info = forms.CharField(required=True)
     selectphysicalMachine = PhysicalMachine.objects.filter(physicalIp=physicalIp)
     if selectphysicalMachine:
         id = selectphysicalMachine.id
@@ -20,19 +19,18 @@ class PhysicalForm(forms.Form):
         v.append(i.virtualIp)
         virtualMachine_List.append(v)
     virtualMachine_ip = forms.MultipleChoiceField(choices=virtualMachine_List, widget=forms.CheckboxSelectMultiple(),
-       required=False)
+                                                  required=False)
+
 
 class VirtualForm(forms.Form):
     virtualIp = forms.CharField(required=True)
-    process_info = forms.TextInput(required=True)
-    note = forms.TextInput(required=True)
-    physicalMachine = PhysicalMachine()
-    phylist = physicalMachine.objects.all()
-    phy = []
-    for i in phylist:
-        v = []
-        v.append(i.physicalIp)
-    phy.append(v)
-    physicalIp = forms.ChoiceField(u"ip", choices=phy, required=True)
-
-
+    physicalMachine = PhysicalMachine.objects.all()
+    physicalip_list = []
+    for phyobj in physicalMachine:
+        p = []
+        p.append(phyobj)
+        physicalip_list.append(p)
+    physicalip = forms.CharField(widget=forms.widgets.Select(choices=physicalip_list),
+                                 required=False)
+    note = forms.CharField(required=True)
+    process_info = forms.CharField(required=True)

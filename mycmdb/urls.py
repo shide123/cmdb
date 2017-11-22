@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from myManager.views import LoginView, RegisterView, RestView, IndexView, ForgetPwdView
+from myManager.views import LoginView, RegisterView, RestView, IndexView, ForgetPwdView,ActiveUserView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^register/$', RegisterView.as_view(), name="register"),
     url(r'^forget/$', ForgetPwdView.as_view(), name="forget"),
-    url(r'^hosts/', include('myhost.urls', namespace='myhost'))
+    url(r'^hosts/', include('myhost.urls', namespace='myhost')),
+    url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
 
 ]
