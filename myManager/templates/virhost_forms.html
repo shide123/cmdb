@@ -3,45 +3,60 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Cloud Admin | Forms</title>
+    <title>Cloud Admin | Dynamic Tables</title>
+    {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- STYLESHEETS -->
     <!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="css/cloud-admin.css">
-    <link rel="stylesheet" type="text/css" href="css/themes/default.css" id="skin-switcher">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/cloud-admin.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/themes/default.css" %}" id="skin-switcher">
+    <link rel="stylesheet" type="text/css" href="{% static "css/responsive.css" %}">
 
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+    <!-- JQUERY UI-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static "js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" %}"/>
     <!-- DATE RANGE PICKER -->
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
-    <!-- TYPEAHEAD -->
-    <link rel="stylesheet" type="text/css" href="js/typeahead/typeahead.css"/>
-    <!-- FILE UPLOAD -->
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-fileupload/bootstrap-fileupload.min.css"/>
-    <!-- SELECT2 -->
-    <link rel="stylesheet" type="text/css" href="js/select2/select2.min.css"/>
-    <!-- UNIFORM -->
-    <link rel="stylesheet" type="text/css" href="js/uniform/css/uniform.default.min.css"/>
-    <!-- JQUERY UPLOAD -->
-    <!-- blueimp Gallery styles -->
-    <link rel="stylesheet" href="js/blueimp/gallery/blueimp-gallery.min.css">
-    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="js/jquery-upload/css/jquery.fileupload.css">
-    <link rel="stylesheet" href="js/jquery-upload/css/jquery.fileupload-ui.css">
+    <link rel="stylesheet" type="text/css" href="{% static "js/bootstrap-daterangepicker/daterangepicker-bs3.css" %}"/>
+    <!-- DATA TABLES -->
+    <link rel="stylesheet" type="text/css" href="{% static "js/datatables/media/css/jquery.dataTables.min.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "js/datatables/media/assets/css/datatables.min.css" %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static "js/datatables/extras/TableTools/media/css/TableTools.min.css" %}"/>
     <!-- FONTS -->
-    <link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+
 </head>
 <body>
+<script type="text/javascript">
+    gethost = function () {
+        var physicalIp_input = document.getElementById("physicalIp_input").value;
+        $.ajax({
+            url: '{% url 'myhost:machineinfo' %}',
+            type: 'GET',
+            data: {"physicalIp_input": physicalIp_input},
+            success: function (data) {
+                data = JSON.parse(data);
+                $("#machine_info_input").val(data.machine_info_str);
+            },
+            error: function () {
+                alert("error!")
+            }
+        });
+    }
+
+</script>
 <!-- HEADER -->
 <header class="navbar clearfix" id="header">
     <div class="container">
         <div class="navbar-brand">
             <!-- COMPANY LOGO -->
             <a href="index.html">
-                <img src="img/logo/logo.png" alt="Cloud Admin Logo" class="img-responsive" height="30" width="120">
+                <img src="{% static "img/logo/logo.png" %}" alt="Cloud Admin Logo" class="img-responsive" height="30"
+                     width="120">
             </a>
             <!-- /COMPANY LOGO -->
             <!-- TEAM STATUS FOR MOBILE -->
@@ -194,28 +209,27 @@
                     </li>
                     <li>
                         <a href="#">
-                            <img src="img/avatars/avatar2.jpg" alt=""/>
+                            <img src="{% static "img/avatars/avatar2.jpg" %}" alt=""/>
                             <span class="body">
 										<span class="from">Jane Doe</span>
 										<span class="message">
 										Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse mole ...
-										</span> 
+										</span>
 										<span class="time">
 											<i class="fa fa-clock-o"></i>
 											<span>Just Now</span>
 										</span>
 									</span>
-
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="img/avatars/avatar1.jpg" alt=""/>
+                            <img src="{% static "img/avatars/avatar1.jpg" %}" alt=""/>
                             <span class="body">
 										<span class="from">Vince Pelt</span>
 										<span class="message">
 										Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse mole ...
-										</span> 
+										</span>
 										<span class="time">
 											<i class="fa fa-clock-o"></i>
 											<span>15 min ago</span>
@@ -226,12 +240,12 @@
                     </li>
                     <li>
                         <a href="#">
-                            <img src="img/avatars/avatar8.jpg" alt=""/>
+                            <img src="{% static "img/avatars/avatar8.jpg" %}" alt=""/>
                             <span class="body">
 										<span class="from">Debby Doe</span>
 										<span class="message">
 										Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse mole ...
-										</span> 
+										</span>
 										<span class="time">
 											<i class="fa fa-clock-o"></i>
 											<span>2 hours ago</span>
@@ -340,7 +354,7 @@
             <!-- BEGIN USER LOGIN DROPDOWN -->
             <li class="dropdown user" id="header-user">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img alt="" src="img/avatars/avatar3.jpg"/>
+                    <img alt="" src="{% static "img/avatars/avatar3.jpg" %}"/>
                     <span class="username">John Doe</span>
                     <i class="fa fa-angle-down"></i>
                 </a>
@@ -355,7 +369,188 @@
         </ul>
         <!-- END TOP NAVIGATION MENU -->
     </div>
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-menu nav-collapse">
+            <div class="divide-20"></div>
+            <!-- SEARCH BAR -->
+            <div id="search-bar">
+                <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+            </div>
 
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <i class="fa fa-tachometer fa-fw"></i> <span class="menu-text">Dashboard</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">UI Features</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="elements.html"><span class="sub-menu-text">Elements</span></a></li>
+                        <li><a class="" href="notifications.html"><span
+                                class="sub-menu-text">Hubspot Notifications</span></a></li>
+                        <li><a class="" href="buttons_icons.html"><span class="sub-menu-text">Buttons &amp; Icons</span></a>
+                        </li>
+                        <li><a class="" href="sliders_progress.html"><span
+                                class="sub-menu-text">Sliders &amp; Progress</span></a></li>
+                        <li><a class="" href="typography.html"><span class="sub-menu-text">Typography</span></a></li>
+                        <li><a class="" href="tabs_accordions.html"><span
+                                class="sub-menu-text">Tabs &amp; Accordions</span></a>
+                        </li>
+                        <li><a class="" href="treeview.html"><span class="sub-menu-text">Treeview</span></a></li>
+                        <li><a class="" href="nestable_lists.html"><span class="sub-menu-text">Nestable Lists</span></a>
+                        </li>
+                        <li class="has-sub-sub">
+                            <a href="javascript:;" class=""><span class="sub-menu-text">Third Level Menu</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-sub">
+                                <li><a class="" href="#"><span class="sub-sub-menu-text">Item 1</span></a></li>
+                                <li><a class="" href="#"><span class="sub-sub-menu-text">Item 2</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="frontend_theme/index.html" target="_blank"><i class="fa fa-desktop fa-fw"></i>
+                    <span class="menu-text">Frontend Theme</span></a></li>
+                <li><a class="" href="inbox.html"><i class="fa fa-envelope-o fa-fw"></i> <span
+                        class="menu-text">Inbox</span></a></li>
+                <li class="has-sub active">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-table fa-fw"></i> <span class="menu-text">hosts</span>
+                        <span class="arrow open"></span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="/hosts/phylist/"><span class="sub-menu-text">physicalmachine</span></a>
+                        </li>
+                        <li class="current"><a class="" href="/hosts/viralllist/"><span
+                                class="sub-menu-text">virmachine</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-pencil-square-o fa-fw"></i> <span class="menu-text">Form Elements</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="forms.html"><span class="sub-menu-text">Forms</span></a></li>
+                        <li><a class="" href="wizards_validations.html"><span class="sub-menu-text">Wizards &amp; Validations</span></a>
+                        </li>
+                        <li><a class="" href="rich_text_editors.html"><span
+                                class="sub-menu-text">Rich Text Editors</span></a></li>
+
+                        <li><a class="" href="dropzone_file_upload.html"><span class="sub-menu-text">Dropzone File Upload</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="widgets_box.html"><i class="fa fa-th-large fa-fw"></i> <span class="menu-text">Widgets &amp; Box</span></a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> <span class="menu-text">Visual Charts</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="flot_charts.html"><span class="sub-menu-text">Flot Charts</span></a></li>
+                        <li><a class="" href="xcharts.html"><span class="sub-menu-text">xCharts</span></a></li>
+
+                        <li><a class="" href="others.html"><span class="sub-menu-text">Others</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-columns fa-fw"></i> <span class="menu-text">Layouts</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="mini_sidebar.html"><span class="sub-menu-text">Mini Sidebar</span></a>
+                        </li>
+                        <li><a class="" href="fixed_header.html"><span class="sub-menu-text">Fixed Header</span></a>
+                        </li>
+
+                        <li><a class="" href="fixed_header_sidebar.html"><span class="sub-menu-text">Fixed Header &amp; Sidebar</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="calendar.html"><i class="fa fa-calendar fa-fw"></i>
+                    <span class="menu-text">Calendar
+									<span class="tooltip-error pull-right" title="" data-original-title="3 New Events">
+										<span class="label label-success">New</span>
+									</span>
+								</span>
+                </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-map-marker fa-fw"></i> <span class="menu-text">Maps</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="google_maps.html"><span class="sub-menu-text">Google Maps</span></a></li>
+                        <li><a class="" href="vector_maps.html"><span class="sub-menu-text">Vector Maps</span></a></li>
+                    </ul>
+                </li>
+                <li><a class="" href="gallery.html"><i class="fa fa-picture-o fa-fw"></i> <span class="menu-text">Gallery</span></a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-file-text fa-fw"></i> <span class="menu-text">More Pages</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="login.html"><span
+                                class="sub-menu-text">Login &amp; Register Option 1</span></a></li>
+                        <li><a class="" href="login_bg.html"><span
+                                class="sub-menu-text">Login &amp; Register Option 2</span></a></li>
+                        <li><a class="" href="user_profile.html"><span class="sub-menu-text">User profile</span></a>
+                        </li>
+
+                        <li><a class="" href="chats.html"><span class="sub-menu-text">Chats</span></a></li>
+                        <li><a class="" href="todo_timeline.html"><span class="sub-menu-text">Todo &amp; Timeline</span></a>
+                        </li>
+                        <li><a class="" href="address_book.html"><span class="sub-menu-text">Address Book</span></a>
+                        </li>
+
+                        <li><a class="" href="pricing.html"><span class="sub-menu-text">Pricing</span></a></li>
+                        <li><a class="" href="invoice.html"><span class="sub-menu-text">Invoice</span></a></li>
+                        <li><a class="" href="orders.html"><span class="sub-menu-text">Orders</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-briefcase fa-fw"></i> <span class="menu-text">Other Pages <span
+                            class="badge pull-right">9</span></span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="search_results.html"><span class="sub-menu-text">Search Results</span></a>
+                        </li>
+                        <li><a class="" href="email_templates.html"><span
+                                class="sub-menu-text">Email Templates</span></a></li>
+
+                        <li><a class="" href="error_404.html"><span class="sub-menu-text">Error 404 Option 1</span></a>
+                        </li>
+                        <li><a class="" href="error_404_2.html"><span
+                                class="sub-menu-text">Error 404 Option 2</span></a></li>
+                        <li><a class="" href="error_404_3.html"><span
+                                class="sub-menu-text">Error 404 Option 3</span></a></li>
+                        <li><a class="" href="error_500.html"><span class="sub-menu-text">Error 500 Option 1</span></a>
+                        </li>
+                        <li><a class="" href="error_500_2.html"><span
+                                class="sub-menu-text">Error 500 Option 2</span></a></li>
+                        <li><a class="" href="faq.html"><span class="sub-menu-text">FAQ</span></a></li>
+                        <li><a class="" href="blank_page.html"><span class="sub-menu-text">Blank Page</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /SIDEBAR MENU -->
+        </div>
+    </div>
     <!-- TEAM STATUS -->
     <div class="container team-status" id="team-status">
         <div id="scrollbar">
@@ -367,7 +562,7 @@
                 <li class="current">
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar3.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar3.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					You
@@ -402,7 +597,7 @@
                 <li>
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar1.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar1.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					Max Doe
@@ -437,7 +632,7 @@
                 <li>
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar2.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar2.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					Jane Doe
@@ -472,7 +667,7 @@
                 <li>
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar4.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar4.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					Ellie Doe
@@ -507,7 +702,7 @@
                 <li>
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar5.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar5.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					Lisa Doe
@@ -542,7 +737,7 @@
                 <li>
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar6.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar6.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					Kelly Doe
@@ -577,7 +772,7 @@
                 <li>
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar7.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar7.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					Jessy Doe
@@ -612,7 +807,7 @@
                 <li>
                     <a href="javascript:void(0);">
 				  <span class="image">
-					  <img src="img/avatars/avatar8.jpg" alt=""/>
+					  <img src="{% static "img/avatars/avatar8.jpg" %}" alt=""/>
 				  </span>
                         <span class="title">
 					Debby Doe
@@ -649,9 +844,7 @@
     </div>
     <!-- /TEAM STATUS -->
 </header>
-<!--/HEADER -->
 
-<!-- PAGE -->
 <section id="page">
     <!-- SIDEBAR -->
     <div id="sidebar" class="sidebar">
@@ -661,13 +854,7 @@
             <div id="search-bar">
                 <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
             </div>
-            <!-- /SEARCH BAR -->
 
-            <!-- SIDEBAR QUICK-LAUNCH -->
-            <!-- <div id="quicklaunch">
-            <!-- /SIDEBAR QUICK-LAUNCH -->
-
-            <!-- SIDEBAR MENU -->
             <ul>
                 <li>
                     <a href="index.html">
@@ -709,28 +896,26 @@
                     <span class="menu-text">Frontend Theme</span></a></li>
                 <li><a class="" href="inbox.html"><i class="fa fa-envelope-o fa-fw"></i> <span
                         class="menu-text">Inbox</span></a></li>
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <i class="fa fa-table fa-fw"></i> <span class="menu-text">Tables</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="simple_table.html"><span class="sub-menu-text">Simple Tables</span></a>
-                        </li>
-                        <li><a class="" href="myHost.html"><span class="sub-menu-text">Dynamic Tables</span></a></li>
-                        <li><a class="" href="jqgrid_plugin.html"><span class="sub-menu-text">jqGrid Plugin</span></a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="has-sub active">
                     <a href="javascript:;" class="">
-                        <i class="fa fa-pencil-square-o fa-fw"></i> <span class="menu-text">Form Elements</span>
+                        <i class="fa fa-table fa-fw"></i> <span class="menu-text">hosts</span>
                         <span class="arrow open"></span>
                         <span class="selected"></span>
                     </a>
                     <ul class="sub">
-                        <li class="current"><a class="" href="forms.html"><span class="sub-menu-text">Forms</span></a>
+                        <li><a class="" href="{% url 'myhost:phyhost_list' %}"><span class="sub-menu-text">physicalmachine</span></a>
                         </li>
+                        <li class="current"><a class="" href="{% url 'myhost:virhost_list' %}"><span
+                                class="sub-menu-text">virmachine</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-pencil-square-o fa-fw"></i> <span class="menu-text">Form Elements</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="forms.html"><span class="sub-menu-text">Forms</span></a></li>
                         <li><a class="" href="wizards_validations.html"><span class="sub-menu-text">Wizards & Validations</span></a>
                         </li>
                         <li><a class="" href="rich_text_editors.html"><span
@@ -844,7 +1029,7 @@
         </div>
     </div>
     <!-- /SIDEBAR -->
-    <div id="main-content" class="margin-left-0">
+    <div id="main-content" class="">
         <!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
         <div class="modal fade" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
@@ -921,19 +1106,22 @@
                                         </div>
                                         <div class="box-body">
 
-                                            <form class="form-horizontal" role="form">
+                                            <form class="form-horizontal" role="form" action="{% url 'myhost:addvir' %}"
+                                                  method="post">
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">虚拟机IP</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control"
-                                                               placeholder="Text input">
+                                                               placeholder="Text input" id="virtualIp"
+                                                               ,name="virtualIp">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">所属物理机</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control"
-                                                               placeholder="Text input">
+                                                               placeholder="Text input" id="physicalIp"
+                                                               name="physicalIp">
                                                     </div>
                                                 </div>
 
@@ -941,7 +1129,8 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">备注</label>
                                                     <div class="col-sm-9">
-                                                        <textarea class="form-control" rows="3"></textarea>
+                                                        <textarea class="form-control" rows="3" id="note"
+                                                                  name="note"></textarea>
                                                     </div>
 
                                                 </div>
@@ -960,7 +1149,9 @@
                                                                                                         spellcheck="false"
                                                                                                         class="select2-input"
                                                                                                         id="s2id_autogen8"
-                                                                                                        style="width: 20px;">
+                                                                                                        style="width: 20px;"
+                                                                                                        id="process_info"
+                                                                                                        name="process_info">
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -977,15 +1168,14 @@
                                                         <i class="fa fa-trash-o"></i>
                                                         <span>删除</span>
                                                     </button>
+                                                    <button type="button" class="btn btn-danger success">
+                                                        <i class="fa fa-trash-o"></i>
+                                                        <span>取消</span>
+                                                    </button>
                                                 </div>
-
                                             </form>
-
-
                                         </div>
                                     </div>
-
-
                                 </div>
 
                             </div>
@@ -993,82 +1183,13 @@
 
                         </div>
                     </div>
-
-
-                </div><!-- /CONTENT-->
+                </div>
             </div>
         </div>
     </div>
 </section>
-<!--/PAGE -->
-<!-- JAVASCRIPTS -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!-- JQUERY -->
-<script src="js/jquery/jquery-2.0.3.min.js"></script>
+<script src="{% static "js/jquery/jquery-2.0.3.min.js" %}"></script>
 <!-- JQUERY UI-->
-<script src="js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
-<!-- BOOTSTRAP -->
-<script src="bootstrap-dist/js/bootstrap.min.js"></script>
-
-
-<!-- DATE RANGE PICKER -->
-<script src="js/bootstrap-daterangepicker/moment.min.js"></script>
-
-<script src="js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
-<!-- SLIMSCROLL -->
-<script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script>
-<script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
-<!-- BLOCK UI -->
-<script type="text/javascript" src="js/jQuery-BlockUI/jquery.blockUI.min.js"></script>
-<!-- TYPEHEAD -->
-<script type="text/javascript" src="js/typeahead/typeahead.min.js"></script>
-<!-- AUTOSIZE -->
-<script type="text/javascript" src="js/autosize/jquery.autosize.min.js"></script>
-<!-- COUNTABLE -->
-<script type="text/javascript" src="js/countable/jquery.simplyCountable.min.js"></script>
-<!-- INPUT MASK -->
-<script type="text/javascript" src="js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-<!-- FILE UPLOAD -->
-<script type="text/javascript" src="js/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
-<!-- SELECT2 -->
-<script type="text/javascript" src="js/select2/select2.min.js"></script>
-<!-- UNIFORM -->
-<script type="text/javascript" src="js/uniform/jquery.uniform.min.js"></script>
-<!-- JQUERY UPLOAD -->
-<!-- The Templates plugin is included to render the upload/download listings -->
-<script src="js/blueimp/javascript-template/tmpl.min.js"></script>
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="js/blueimp/javascript-loadimg/load-image.min.js"></script>
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="js/blueimp/javascript-canvas-to-blob/canvas-to-blob.min.js"></script>
-<!-- blueimp Gallery script -->
-<script src="js/blueimp/gallery/jquery.blueimp-gallery.min.js"></script>
-<!-- The basic File Upload plugin -->
-<script src="js/jquery-upload/js/jquery.fileupload.min.js"></script>
-<!-- The File Upload processing plugin -->
-<script src="js/jquery-upload/js/jquery.fileupload-process.min.js"></script>
-<!-- The File Upload image preview & resize plugin -->
-<script src="js/jquery-upload/js/jquery.fileupload-image.min.js"></script>
-<!-- The File Upload audio preview plugin -->
-<script src="js/jquery-upload/js/jquery.fileupload-audio.min.js"></script>
-<!-- The File Upload video preview plugin -->
-<script src="js/jquery-upload/js/jquery.fileupload-video.min.js"></script>
-<!-- The File Upload validation plugin -->
-<script src="js/jquery-upload/js/jquery.fileupload-validate.min.js"></script>
-<!-- The File Upload user interface plugin -->
-<script src="js/jquery-upload/js/jquery.fileupload-ui.min.js"></script>
-<!-- The main application script -->
-<script src="js/jquery-upload/js/main.js"></script>
-<!-- COOKIE -->
-<script type="text/javascript" src="js/jQuery-Cookie/jquery.cookie.min.js"></script>
-<!-- CUSTOM SCRIPT -->
-<script src="js/script.js"></script>
-<script>
-    jQuery(document).ready(function () {
-        App.setPage("forms");  //Set current page
-        App.init(); //Initialise plugins and elements
-    });
-</script>
-<!-- /JAVASCRIPTS -->
+<script src="{% static "js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js" %}"></script>
 </body>
 </html>

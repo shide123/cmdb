@@ -37,12 +37,13 @@
         $.ajax({
             url: '{% url 'myhost:machineinfo' %}',
             type: 'GET',
-            data: {"physicalIp_input":physicalIp_input},
+            data: {"physicalIp_input": physicalIp_input},
             success: function (data) {
-                console.log(data);
+                data = JSON.parse(data);
+                $("#machine_info_input").val(data.machine_info_str);
             },
             error: function () {
-
+                alert("error!")
             }
         });
     }
@@ -368,7 +369,188 @@
         </ul>
         <!-- END TOP NAVIGATION MENU -->
     </div>
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-menu nav-collapse">
+            <div class="divide-20"></div>
+            <!-- SEARCH BAR -->
+            <div id="search-bar">
+                <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+            </div>
 
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <i class="fa fa-tachometer fa-fw"></i> <span class="menu-text">Dashboard</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-bookmark-o fa-fw"></i> <span class="menu-text">UI Features</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="elements.html"><span class="sub-menu-text">Elements</span></a></li>
+                        <li><a class="" href="notifications.html"><span
+                                class="sub-menu-text">Hubspot Notifications</span></a></li>
+                        <li><a class="" href="buttons_icons.html"><span class="sub-menu-text">Buttons &amp; Icons</span></a>
+                        </li>
+                        <li><a class="" href="sliders_progress.html"><span
+                                class="sub-menu-text">Sliders &amp; Progress</span></a></li>
+                        <li><a class="" href="typography.html"><span class="sub-menu-text">Typography</span></a></li>
+                        <li><a class="" href="tabs_accordions.html"><span
+                                class="sub-menu-text">Tabs &amp; Accordions</span></a>
+                        </li>
+                        <li><a class="" href="treeview.html"><span class="sub-menu-text">Treeview</span></a></li>
+                        <li><a class="" href="nestable_lists.html"><span class="sub-menu-text">Nestable Lists</span></a>
+                        </li>
+                        <li class="has-sub-sub">
+                            <a href="javascript:;" class=""><span class="sub-menu-text">Third Level Menu</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-sub">
+                                <li><a class="" href="#"><span class="sub-sub-menu-text">Item 1</span></a></li>
+                                <li><a class="" href="#"><span class="sub-sub-menu-text">Item 2</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="frontend_theme/index.html" target="_blank"><i class="fa fa-desktop fa-fw"></i>
+                    <span class="menu-text">Frontend Theme</span></a></li>
+                <li><a class="" href="inbox.html"><i class="fa fa-envelope-o fa-fw"></i> <span
+                        class="menu-text">Inbox</span></a></li>
+                <li class="has-sub active">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-table fa-fw"></i> <span class="menu-text">hosts</span>
+                        <span class="arrow open"></span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="/hosts/phylist/"><span class="sub-menu-text">physicalmachine</span></a>
+                        </li>
+                        <li class="current"><a class="" href="/hosts/viralllist/"><span
+                                class="sub-menu-text">virmachine</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-pencil-square-o fa-fw"></i> <span class="menu-text">Form Elements</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="forms.html"><span class="sub-menu-text">Forms</span></a></li>
+                        <li><a class="" href="wizards_validations.html"><span class="sub-menu-text">Wizards &amp; Validations</span></a>
+                        </li>
+                        <li><a class="" href="rich_text_editors.html"><span
+                                class="sub-menu-text">Rich Text Editors</span></a></li>
+
+                        <li><a class="" href="dropzone_file_upload.html"><span class="sub-menu-text">Dropzone File Upload</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="widgets_box.html"><i class="fa fa-th-large fa-fw"></i> <span class="menu-text">Widgets &amp; Box</span></a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> <span class="menu-text">Visual Charts</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="flot_charts.html"><span class="sub-menu-text">Flot Charts</span></a></li>
+                        <li><a class="" href="xcharts.html"><span class="sub-menu-text">xCharts</span></a></li>
+
+                        <li><a class="" href="others.html"><span class="sub-menu-text">Others</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-columns fa-fw"></i> <span class="menu-text">Layouts</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="mini_sidebar.html"><span class="sub-menu-text">Mini Sidebar</span></a>
+                        </li>
+                        <li><a class="" href="fixed_header.html"><span class="sub-menu-text">Fixed Header</span></a>
+                        </li>
+
+                        <li><a class="" href="fixed_header_sidebar.html"><span class="sub-menu-text">Fixed Header &amp; Sidebar</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="" href="calendar.html"><i class="fa fa-calendar fa-fw"></i>
+                    <span class="menu-text">Calendar
+									<span class="tooltip-error pull-right" title="" data-original-title="3 New Events">
+										<span class="label label-success">New</span>
+									</span>
+								</span>
+                </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-map-marker fa-fw"></i> <span class="menu-text">Maps</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="google_maps.html"><span class="sub-menu-text">Google Maps</span></a></li>
+                        <li><a class="" href="vector_maps.html"><span class="sub-menu-text">Vector Maps</span></a></li>
+                    </ul>
+                </li>
+                <li><a class="" href="gallery.html"><i class="fa fa-picture-o fa-fw"></i> <span class="menu-text">Gallery</span></a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-file-text fa-fw"></i> <span class="menu-text">More Pages</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="login.html"><span
+                                class="sub-menu-text">Login &amp; Register Option 1</span></a></li>
+                        <li><a class="" href="login_bg.html"><span
+                                class="sub-menu-text">Login &amp; Register Option 2</span></a></li>
+                        <li><a class="" href="user_profile.html"><span class="sub-menu-text">User profile</span></a>
+                        </li>
+
+                        <li><a class="" href="chats.html"><span class="sub-menu-text">Chats</span></a></li>
+                        <li><a class="" href="todo_timeline.html"><span class="sub-menu-text">Todo &amp; Timeline</span></a>
+                        </li>
+                        <li><a class="" href="address_book.html"><span class="sub-menu-text">Address Book</span></a>
+                        </li>
+
+                        <li><a class="" href="pricing.html"><span class="sub-menu-text">Pricing</span></a></li>
+                        <li><a class="" href="invoice.html"><span class="sub-menu-text">Invoice</span></a></li>
+                        <li><a class="" href="orders.html"><span class="sub-menu-text">Orders</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-briefcase fa-fw"></i> <span class="menu-text">Other Pages <span
+                            class="badge pull-right">9</span></span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="search_results.html"><span class="sub-menu-text">Search Results</span></a>
+                        </li>
+                        <li><a class="" href="email_templates.html"><span
+                                class="sub-menu-text">Email Templates</span></a></li>
+
+                        <li><a class="" href="error_404.html"><span class="sub-menu-text">Error 404 Option 1</span></a>
+                        </li>
+                        <li><a class="" href="error_404_2.html"><span
+                                class="sub-menu-text">Error 404 Option 2</span></a></li>
+                        <li><a class="" href="error_404_3.html"><span
+                                class="sub-menu-text">Error 404 Option 3</span></a></li>
+                        <li><a class="" href="error_500.html"><span class="sub-menu-text">Error 500 Option 1</span></a>
+                        </li>
+                        <li><a class="" href="error_500_2.html"><span
+                                class="sub-menu-text">Error 500 Option 2</span></a></li>
+                        <li><a class="" href="faq.html"><span class="sub-menu-text">FAQ</span></a></li>
+                        <li><a class="" href="blank_page.html"><span class="sub-menu-text">Blank Page</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /SIDEBAR MENU -->
+        </div>
+    </div>
     <!-- TEAM STATUS -->
     <div class="container team-status" id="team-status">
         <div id="scrollbar">
@@ -662,9 +844,7 @@
     </div>
     <!-- /TEAM STATUS -->
 </header>
-<!--/HEADER -->
 
-<!-- PAGE -->
 <section id="page">
     <!-- SIDEBAR -->
     <div id="sidebar" class="sidebar">
@@ -906,7 +1086,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <!-- BASIC -->
-                                    <div class="box border orange">
+                                    <div class="box border green">
                                         <div class="box-title">
                                             <h4><i class="fa fa-bars"></i>我是物理机</h4>
                                             <div class="tools hidden-xs">
@@ -937,7 +1117,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label">地址</label>
+                                                    <label class="col-sm-3 control-label">机房地址</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control"
                                                                placeholder="Text input" id="machineRoom_address"
@@ -952,43 +1132,20 @@
                                                                name="machineRoom_attr">
                                                     </div>
                                                 </div>
-                                                <form>
-                                                    {% csrf_token %}
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">机器详情</label>
-                                                        <div class="col-sm-9">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">机器详情</label>
+                                                    <div class="col-sm-9">
                                                         <textarea class="form-control" rows="3" id="machine_info_input"
                                                                   name="machine_info_input"></textarea>
-                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-12">
-                                                        <button type="button" class="btn btn-inverse"
-                                                                onclick="gethost();">
-                                                            <span>获取详情</span>
-                                                        </button>
-                                                    </div>
-                                                </form>
+                                                </div>
                                                 <div class="form-group">
-                                                    <label class="col-md-2 control-label"
-                                                           for="s2id_autogen8">下属虚拟机</label>
-                                                    <div class="col-md-10">
-                                                        <div class="select2-container select2-container-multi col-md-12"
-                                                             id="s2id_e8">
-                                                            <ul class="select2-choices">
-                                                                <li class="select2-search-field"><input type="text"
-                                                                                                        autocomplete="off"
-                                                                                                        autocorrect="off"
-                                                                                                        autocapitalize="off"
-                                                                                                        spellcheck="false"
-                                                                                                        class="select2-input"
-                                                                                                        id="s2id_autogen8"
-                                                                                                        style="width: 20px;">
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <input type="hidden" id="e8"
-                                                               class="col-md-12 select2-offscreen" value=""
-                                                               tabindex="-1">
+                                                    <label class="col-sm-3 control-label">下属虚拟机</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Text input" id="virtualMachine_ip"
+                                                               name="virtualMachine_ip">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
@@ -997,13 +1154,21 @@
                                                         <span>提交</span>
                                                     </button>
                                                 </div>
-
+                                                <div class="col-lg-12">
+                                                    <button type="button" class="btn btn-danger delete"
+                                                            onclick="javascript:window.location.href='{% url 'myhost:delphy' %}'">
+                                                        <i class="fa fa-trash-o"></i>
+                                                        <span>删除</span>
+                                                    </button>
+                                                </div>
                                             </form>
-                                            <button type="button" class="btn btn-danger delete">
-                                                <i class="fa fa-trash-o"></i>
-                                                <span>删除</span>
+                                            <button type="button" class="btn btn-inverse"
+                                                    onclick="gethost();">
+                                                <span>获取机器详情</span>
                                             </button>
-                                            <button type="button" class="btn btn-success tip-right">
+
+                                            <button type="button" class="btn btn-success tip-right"
+                                                    onclick="javascript:window.location.href='{% url 'myhost:cancelphy' %}'">
                                                 <i class="fa fa-arrow-circle-o-up"></i>
                                                 <span>取消</span>
                                             </button>

@@ -656,13 +656,7 @@
             <div id="search-bar">
                 <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
             </div>
-            <!-- /SEARCH BAR -->
 
-            <!-- SIDEBAR QUICK-LAUNCH -->
-            <!-- <div id="quicklaunch">
-            <!-- /SIDEBAR QUICK-LAUNCH -->
-
-            <!-- SIDEBAR MENU -->
             <ul>
                 <li>
                     <a href="index.html">
@@ -837,14 +831,14 @@
         </div>
     </div>
     <!-- /SIDEBAR -->
-    <div id="main-content">
+    <div id="main-content" class="">
         <!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
         <div class="modal fade" id="box-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title">Box Settings</h4>
                     </div>
                     <div class="modal-body">
@@ -857,14 +851,42 @@
                 </div>
             </div>
         </div>
-        <!--PhyhostListView-->
-        <div class="phyhost_list">
+        <!-- /SAMPLE BOX CONFIGURATION MODAL FORM-->
+        <div class="container">
             <div class="row">
-                <div id="content" class="col-lg-12">
+                <div id="content" class="col-lg-12" style="min-height:889px !important">
+                    <!-- PAGE HEADER-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-header">
+                                <!-- STYLER -->
+
+                                <!-- /STYLER -->
+                                <!-- BREADCRUMBS -->
+                                <ul class="breadcrumb">
+                                    <li>
+                                        <i class="fa fa-home"></i>
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Tables</a>
+                                    </li>
+                                    <li>Dynamic Tables</li>
+                                </ul>
+                                <!-- /BREADCRUMBS -->
+                                <div class="clearfix">
+                                    <h3 class="content-title pull-left">服务器管理</h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /PAGE HEADER -->
+                    <!-- DATA TABLES -->
                     <div class="row">
                         <div class="col-md-12">
                             <!-- BOX -->
-                            <div class="box border green">
+                            <div class="box border orange">
                                 <div class="box-title">
                                     <h4><i class="fa fa-table"></i>物理机列表</h4>
                                     <div class="tools hidden-xs">
@@ -884,6 +906,33 @@
                                 </div>
                                 <div class="box-body">
                                     <div id="datatable1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="pull-right">
+                                                    <div class="dataTables_filter" id="datatable1_filter"><label><input
+                                                            type="text" aria-controls="datatable1" placeholder="Search"
+                                                            class="form-control input-sm"></label></div>
+                                                </div>
+                                                <div class="pull-left">
+                                                    <div id="datatable1_length" class="dataTables_length"><label>Show
+                                                        <select size="1" name="datatable1_length"
+                                                                aria-controls="datatable1"
+                                                                class="form-control input-sm">
+                                                            <option value="10" selected="selected">10</option>
+                                                        </select> Rows</label>
+
+                                                        <label>&nbsp;&nbsp;&nbsp;
+                                                            <button class="btn btn-info"
+                                                                    onclick="javascript:window.location.href='{% url 'myhost:addvir' %}'"
+                                                            >添加
+                                                            </button>
+                                                        </label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
                                         <table id="datatable1" cellpadding="0" cellspacing="0" border="0"
                                                class="datatable table table-striped table-bordered table-hover dataTable"
                                                aria-describedby="datatable1_info">
@@ -920,12 +969,13 @@
                                             <tbody role="alert" aria-live="polite" aria-relevant="all">
                                             {% for physical in all_physical.object_list %}
                                                 <tr class="physical_list">
-                                                    <td class=" sorting_1" , name="physicalip" , id="physicalip">
+                                                    <td class=" sorting_1" , name="physicalip" id="physicalip">
                                                         <a href="{% url 'myhost:phyhost_detail' physical.physicalIp %}"> </a>
                                                         {{ physical.physicalIp }}}
                                                     </td>
                                                     <td class=" ">{{ physical.machineRoom_address }}}</td>
-                                                    <td class="hidden-xs ">{{ physical.machineRoom_attr }}}/td>
+                                                    <td class="hidden-xs ">{{ physical.machineRoom_attr }}}
+                                                    </td>
                                                     <td class="center ">
                                                         <a href="{% url 'myhost:virhost_list' physical.physicalIp %}"> </a>
                                                         查看详情
@@ -935,56 +985,60 @@
                                             {% endfor %}
                                             </tbody>
                                         </table>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="pull-left">
+                                                    <div class="dataTables_info" id="datatable1_info">Showing X to xx of
+                                                        xxx entries
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <div class="dataTables_paginate paging_bs_full"
+                                                         id="datatable1_paginate">
+                                                        <ul class="pagination">
+                                                            {% if all_physical.has_previous %}
+                                                                <li class="disabled">
+                                                                    <a href="?{{ all_physical.previous_page_number.querystring }}"
+                                                                       tabindex="0" class="paginate_button previous"
+                                                                       id="datatable1_previous">
+                                                                        Previous
+                                                                    </a>
+                                                                </li>
+                                                            {% endif %}
+                                                            {% for page in all_physical.pages %}
+                                                                {% if page %}
+                                                                    {% ifequal page all_physical.number %}
+                                                                        <li class="active">
+                                                                            <a tabindex="0"
+                                                                               href="?{{ page.querystring }}"
+                                                                               class="page">{{ page }}
+                                                                            </a>
+                                                                        </li>
+                                                                    {% else %}
+                                                                        <li>
+                                                                            <a href="?{{ page.querystring }}"
+                                                                               class="page">{{ page }}
+                                                                            </a>
+                                                                        </li>
+                                                                    {% endifequal %}
+                                                                {% else %}
+                                                                    <li class="none"><a href="">...</a></li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            {% if all_physical.has_next %}
+                                                                <li>
+                                                                    <a href="?{{ all_physical.next_page_number.querystring }}"
+                                                                       tabindex="0" class="paginate_button next"
+                                                                       id="datatable1_next">
+                                                                        Next</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="separator"></div>
-                    <div class="modal fade" id="table-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content modal-table">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title">Table inside a Modal</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -992,45 +1046,8 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
-<!--/PAGE -->
-<!-- JAVASCRIPTS -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!-- JQUERY -->
-<script src="{% static "js/jquery/jquery-2.0.3.min.js" %}"></script>
-<!-- JQUERY UI-->
-<script src="{% static "js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js" %}"></script>
-<!-- BOOTSTRAP -->
-<script src="{% static "bootstrap-dist/js/bootstrap.min.js" %}"></script>
 
-
-<!-- DATE RANGE PICKER -->
-<script src="{% static "js/bootstrap-daterangepicker/moment.min.js" %}"></script>
-
-<script src="{% static "js/bootstrap-daterangepicker/daterangepicker.min.js" %}"></script>
-<!-- SLIMSCROLL -->
-<script type="text/javascript" src="{% static "js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js" %}"></script>
-<!-- BLOCK UI -->
-<script type="text/javascript" src="{% static "js/jQuery-BlockUI/jquery.blockUI.min.js" %}"></script>
-<!-- DATA TABLES -->
-<script type="text/javascript" src="{% static "js/datatables/media/js/jquery.dataTables.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/datatables/media/assets/js/datatables.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/datatables/extras/TableTools/media/js/TableTools.min.js" %}"></script>
-<script type="text/javascript"
-        src="{% static "js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js" %}"></script>
-<!-- COOKIE -->
-<script type="text/javascript" src="{% static "js/jQuery-Cookie/jquery.cookie.min.js" %}"></script>
-<!-- CUSTOM SCRIPT -->
-<script src="{% static "js/script.js" %}"></script>
-<script>
-    jQuery(document).ready(function () {
-        App.setPage("dynamic_table");  //Set current page
-        App.init(); //Initialise plugins and elements
-    });
-</script>
-<!-- /JAVASCRIPTS -->
 </body>
 </html>

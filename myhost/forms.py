@@ -9,17 +9,18 @@ class PhysicalForm(forms.Form):
     machineRoom_address = forms.CharField(required=True)
     machineRoom_attr = forms.CharField(required=True)
     machine_info = forms.CharField(required=True)
-    selectphysicalMachine = PhysicalMachine.objects.filter(physicalIp=physicalIp)
-    if selectphysicalMachine:
-        id = selectphysicalMachine.id
-    virtualMachineModel = VirtualMachine.objects.filter(physicalMachine=selectphysicalMachine)
-    virtualMachine_List = []
-    for i in virtualMachineModel:
-        v = []
-        v.append(i.virtualIp)
-        virtualMachine_List.append(v)
-    virtualMachine_ip = forms.MultipleChoiceField(choices=virtualMachine_List, widget=forms.CheckboxSelectMultiple(),
-                                                  required=False)
+    virtualMachine_ip = forms.CharField(required=False)
+    # selectphysicalMachine = PhysicalMachine.objects.filter(physicalIp=physicalIp)
+    # if selectphysicalMachine:
+    #     id = selectphysicalMachine.id
+    # virtualMachineModel = VirtualMachine.objects.filter(physicalMachine=selectphysicalMachine)
+    # virtualMachine_List = []
+    # for i in virtualMachineModel:
+    #     v = []
+    #     v.append(i.virtualIp)
+    #     virtualMachine_List.append(v)
+    # virtualMachine_ip = forms.MultipleChoiceField(choices=virtualMachine_List, widget=forms.CheckboxSelectMultiple(),
+    #                                               required=False)
 
 
 class VirtualForm(forms.Form):
@@ -30,7 +31,7 @@ class VirtualForm(forms.Form):
         p = []
         p.append(phyobj)
         physicalip_list.append(p)
-    physicalip = forms.CharField(widget=forms.widgets.Select(choices=physicalip_list),
+    physicalIp = forms.CharField(widget=forms.widgets.Select(choices=physicalip_list),
                                  required=False)
     note = forms.CharField(required=True)
     process_info = forms.CharField(required=True)
