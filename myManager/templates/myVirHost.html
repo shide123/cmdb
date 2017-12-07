@@ -240,8 +240,6 @@
                     </li>
                 </ul>
             </li>
-            <!-- END INBOX DROPDOWN -->
-            <!-- BEGIN TODO DROPDOWN -->
             <li class="dropdown" id="header-tasks">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-tasks"></i>
@@ -967,11 +965,11 @@
                                             </tr>
                                             </thead>
                                             <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                            {% for physical in all_physical.object_list %}
+                                            {% for vir in all_vir.object_list %}
                                                 <tr class="physical_list">
                                                     <td class=" sorting_1" , name="physicalip" id="physicalip">
-                                                        <a href="{% url 'myhost:phyhost_detail' physical.physicalIp %}"> </a>
-                                                        {{ physical.physicalIp }}}
+                                                        <a href="{% url 'myhost:phyhost_detail' vir.physicalIp %}"> </a>
+                                                        {{ vir.physicalIp }}}
                                                     </td>
                                                     <td class=" ">{{ physical.machineRoom_address }}}</td>
                                                     <td class="hidden-xs ">{{ physical.machineRoom_attr }}}

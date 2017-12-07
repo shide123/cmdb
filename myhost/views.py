@@ -35,9 +35,9 @@ class VirhostList_allView(View):
     def get(self, request):
         all_virtual = VirtualMachine.objects.all().order_by("virtualIp")
         try:
-           page = request.GET.get('page', 1)
+            page = request.GET.get('page', 1)
         except PageNotAnInteger:
-           page = 1
+            page = 1
         p = Paginator(all_virtual, 3, request=request)
         virtual_list = p.page(page)
         return render(request, 'myVirHost.html', {'all_virtual', virtual_list})
@@ -88,7 +88,8 @@ class AddPhyHostView(View):
                 dic = {'physicalIp': physicalIp_input, 'machineRoom_address': machineRoom_address,
                        'machineRoom_attr': machineRoom_attr, 'machine_info_id': machine_id}
                 PhysicalMachine.objects.create(**dic)
-                return render(request, 'myhost:phyhost_list')
+                response = HttpResponsePermanentRedirect(reversed('myhost:phyhost_list'))
+                return response
             else:
                 return render(request, 'error_500.html')
         return render(request, 'error_500.html')
@@ -215,7 +216,7 @@ class CancelPhyHostView(View):
         return render(request, 'myhost:phyhost_list')
 
 
-# do
+
 class AddVirHostView(View):
     def get(self, request):
         return render(request, 'virhost_forms.html')
@@ -229,17 +230,15 @@ class AddVirHostView(View):
             process_info = request.POST.get('process_info', '')
             cursor = connection.cursor()
             phyHost = PhysicalMachine.objects.filter(physicalIp=physicalIp)
-            physicalId = cursor.execute("select id from  myhost_physicalmachine where physicalIp=%s", [physicalIp])
-            phyHost
+            physicalId = cursor.execute("select id from myhost_physicalmachine where physicalIp=%s", [physicalIp])
             virtualmachine = VirtualMachine.objects.filter(virtualIp=virtualIp)
             if virtualmachine:
                 logging.info("exit virhost")
-                return render(request, 'myhost:addvir')
+                return render(request, 'virhost_forms.html')
             else:
                 dic = {'virtualIp': virtualIp, 'process_info': process_info, 'note': note, 'physicalId': physicalId}
                 VirtualMachine.save(**dic)
-                return render(request, 'myhost:viralllist')
+                all_vir = VirtualMachine.objects.all()
+                return render(request, 'myVirHost.html', {'all_vir': all_vir})
         else:
-            return render(request, 'myhost:addvir')
-
-
+            return render(request, 'virhost_forms.html')
