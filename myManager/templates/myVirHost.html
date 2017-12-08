@@ -940,45 +940,30 @@
                                                     aria-controls="datatable1" rowspan="1" colspan="1"
                                                     aria-sort="ascending"
                                                     aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 150px;">物理IP
+                                                    style="width: 150px;">IP
                                                 </th>
                                                 <th class="sorting" role="columnheader" tabindex="0"
                                                     aria-controls="datatable1" rowspan="1" colspan="1"
                                                     aria-label="Browser: activate to sort column ascending"
-                                                    style="width: 202px;">地址
+                                                    style="width: 202px;">process info
                                                 </th>
                                                 <th class="hidden-xs sorting" role="columnheader" tabindex="0"
                                                     aria-controls="datatable1" rowspan="1" colspan="1"
                                                     aria-label="Platform(s): activate to sort column ascending"
-                                                    style="width: 182px;">类型
-                                                </th>
-                                                <th class="sorting" role="columnheader" tabindex="0"
-                                                    aria-controls="datatable1" rowspan="1" colspan="1"
-                                                    aria-label="Engine version: activate to sort column ascending"
-                                                    style="width: 127px;">下属虚拟机
-                                                </th>
-                                                <th class="hidden-xs sorting" role="columnheader" tabindex="0"
-                                                    aria-controls="datatable1" rowspan="1" colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending"
-                                                    style="width: 87px;">配置信息
+                                                    style="width: 182px;">note
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody role="alert" aria-live="polite" aria-relevant="all">
                                             {% for vir in all_vir.object_list %}
-                                                <tr class="physical_list">
-                                                    <td class=" sorting_1" , name="physicalip" id="physicalip">
-                                                        <a href="{% url 'myhost:phyhost_detail' vir.physicalIp %}"> </a>
-                                                        {{ vir.physicalIp }}}
+                                                <tr class="virtual_list">
+                                                    <td class=" sorting_1" , name="virtualip" id="virtualip">
+                                                        <a href="{% url 'myhost:virdetail' vir.virtualIp %}"> </a>
+                                                        {{ vir.virtualIp }}}
                                                     </td>
-                                                    <td class=" ">{{ physical.machineRoom_address }}}</td>
-                                                    <td class="hidden-xs ">{{ physical.machineRoom_attr }}}
+                                                    <td class=" ">{{ vir.process_info }}}</td>
+                                                    <td class="hidden-xs ">{{ vir.note }}}
                                                     </td>
-                                                    <td class="center ">
-                                                        <a href="{% url 'myhost:virhost_list' physical.physicalIp %}"> </a>
-                                                        查看详情
-                                                    </td>
-                                                    <td class="center hidden-xs ">{{ physical.machine_info }}}</td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>
@@ -994,18 +979,18 @@
                                                     <div class="dataTables_paginate paging_bs_full"
                                                          id="datatable1_paginate">
                                                         <ul class="pagination">
-                                                            {% if all_physical.has_previous %}
+                                                            {% if all_virtual.has_previous %}
                                                                 <li class="disabled">
-                                                                    <a href="?{{ all_physical.previous_page_number.querystring }}"
+                                                                    <a href="?{{ all_virtual.previous_page_number.querystring }}"
                                                                        tabindex="0" class="paginate_button previous"
                                                                        id="datatable1_previous">
                                                                         Previous
                                                                     </a>
                                                                 </li>
                                                             {% endif %}
-                                                            {% for page in all_physical.pages %}
+                                                            {% for page in all_virtual.pages %}
                                                                 {% if page %}
-                                                                    {% ifequal page all_physical.number %}
+                                                                    {% ifequal page all_virtual.number %}
                                                                         <li class="active">
                                                                             <a tabindex="0"
                                                                                href="?{{ page.querystring }}"
@@ -1023,9 +1008,9 @@
                                                                     <li class="none"><a href="">...</a></li>
                                                                 {% endif %}
                                                             {% endfor %}
-                                                            {% if all_physical.has_next %}
+                                                            {% if all_virtual.has_next %}
                                                                 <li>
-                                                                    <a href="?{{ all_physical.next_page_number.querystring }}"
+                                                                    <a href="?{{ all_virtual.next_page_number.querystring }}"
                                                                        tabindex="0" class="paginate_button next"
                                                                        id="datatable1_next">
                                                                         Next</a>
