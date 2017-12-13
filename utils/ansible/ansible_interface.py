@@ -1,5 +1,9 @@
 # -*- coding:utf-8 -*-
 import json
+
+import time
+from pykickstart.commands import logging
+
 from ansible_api import AnsibleAPI
 
 
@@ -59,11 +63,18 @@ class AnsiInterface(AnsibleAPI):
         result = self.get_result()
         return self.deal_result(result, 'setup')
 
+
 if __name__ == "__main__":
-    resource = [{"hostname": "172.16.251.112", "port": "22", "username": "lishide", "password": "lishide",
-                 "ip": '172.16.251.112'}
+    resource = [{"hostname": "172.16.251.114", "port": "1221", "username": "lishide", "password": "lishide",
+                 "ip": '172.16.251.114'}
                 ]
+    # resource = [{"hostname": "123.103.74.8", "port": "1221", "username": "lishide", "password": "lishide",
+    #              "ip": '123.103.74.8'}
+    #             ]
     interface = AnsiInterface(resource)
+
+    interface.getHostInfo()
     # print "copy: ", interface.copy_file(['172.20.3.18', '172.20.3.31'], src='/Users/majing/test1.py', dest='/opt')
-    # print "commands: ", interface.exec_command(['172.16.251.116'], 'pwd')
-    print "setup: ", interface.exec_setup(['172.16.251.116'])
+    # print "commands: ", interface.exec_command(['172.16.251.116'], 'id lishide')
+    print "setup: ", interface.exec_setup(['172.16.251.114'])
+
