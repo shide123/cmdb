@@ -6,8 +6,8 @@ import logging
 
 from collections import namedtuple
 from ansible.parsing.dataloader import DataLoader
-from ansible.vars import VariableManager
-from ansible.inventory import Inventory
+from ansible.vars.manager import VariableManager
+from ansible.inventory.manager import InventoryManager
 from ansible.inventory.group import Group
 from ansible.inventory.host import Host
 from ansible.playbook.play import Play
@@ -15,8 +15,8 @@ from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.executor.playbook_executor import PlaybookExecutor
 from ansible.plugins.callback import CallbackBase
 
-
 logger = logging.basicConfig()
+
 
 class ResultsCollector(CallbackBase):
     def __init__(self, *args, **kwargs):
@@ -35,7 +35,7 @@ class ResultsCollector(CallbackBase):
         self.host_failed[result._host.get_name()] = result
 
 
-class MyInventory(Inventory):
+class MyInventory(InventoryManager):
     """
     this is my ansible inventory object.
     """
@@ -54,7 +54,7 @@ class MyInventory(Inventory):
             [{"hostname": "10.0.0.0", "port": "22", "username": "test", "password": "pass"}, ...]
         """
         self.resource = resource
-        self.inventory = Inventory(loader=loader, variable_manager=variable_manager, host_list=[])
+        self.inventory = InventoryManager(loader=loader, variable_manager=variable_manager, host_list=[])
         self.gen_inventory()
 
     def my_add_group(self, hosts, groupname, groupvars=None):
@@ -134,7 +134,8 @@ class AnsibleAPI(object):
         # initialize needed objects
         self.variable_manager = VariableManager()
         self.loader = DataLoader()
-        self.options = Options(connection='smart', module_path='/usr/lib/python2.7/site-packages/ansible/plugins', forks=100, timeout=10,
+        self.options = Options(connection='smart', module_path='/usr/lib/python2.7/site-packages/ansible/plugins',
+                               forks=100, timeout=10,
                                remote_user='root', ask_pass=False, private_key_file=None, ssh_common_args=None,
                                ssh_extra_args=None,
                                sftp_extra_args=None, scp_extra_args=None, become=None, become_method=None,
@@ -205,7 +206,7 @@ class AnsibleAPI(object):
             executor._tqm._stdout_callback = self.callback
             executor.run()
         except Exception as e:
-            print "error:",e.message
+            print "error:", e.message
 
     def get_result(self):
         self.results_raw = {'success': {}, 'failed': {}, 'unreachable': {}}

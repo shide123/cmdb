@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'cmdb',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1'
+        'HOST': '172.16.41.48'
     }
 }
 
