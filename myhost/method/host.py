@@ -216,4 +216,4 @@ def getHostInfo_ajax(request):
 if __name__ == '__main__':
     # resource = [{"hostname": "172.16.251.114", "port": "1221", "username": "lishide", "password": "lishide",
     #              "ip": '172.16.251.114'}
-    getHostInfo("123.103.74.8", "1221", "lishide", "lishide", "123.103.74.8")
+    getHostInfo("123.103.74.8", "1221", "test", "test", "123.103.74.8")
